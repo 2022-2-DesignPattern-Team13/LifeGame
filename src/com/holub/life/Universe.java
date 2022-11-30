@@ -215,25 +215,26 @@ public class Universe extends JPanel
 	}
 
 	private void doCompose()
-	{	try
-		{
-			FileInputStream in = new FileInputStream(
-					Files.userSelected(".", ".life", "Life File", "Load"));
-
-			Clock.instance().stop();        // stop the game and
-			outermostCell.clear();            // clear the board.
-
-			Storable memento = outermostCell.createMemento();
-			memento.load(in);
-			outermostCell.transfer(memento, new Point(0, 0), Cell.LOAD);
-
-			in.close();
-		}
-		catch (IOException theException) {
-			JOptionPane.showMessageDialog(null, "Compose Failed!",
-					"The Game of Life", JOptionPane.ERROR_MESSAGE);
-		}
-		repaint();
+	{	Window composeWindow = new ComposeWindow();
+//		try
+//		{
+//			FileInputStream in = new FileInputStream(
+//					Files.userSelected(".", ".life", "Life File", "Load"));
+//
+//			Clock.instance().stop();        // stop the game and
+//			outermostCell.clear();            // clear the board.
+//
+//			Storable memento = outermostCell.createMemento();
+//			memento.load(in);
+//			outermostCell.transfer(memento, new Point(0, 0), Cell.LOAD);
+//
+//			in.close();
+//		}
+//		catch (IOException theException) {
+//			JOptionPane.showMessageDialog(null, "Compose Failed!",
+//					"The Game of Life", JOptionPane.ERROR_MESSAGE);
+//		}
+//		repaint();
 	}
 
 	/** Override paint to ask the outermost Neighborhood
