@@ -131,6 +131,15 @@ public class Universe extends JPanel
 		);
 
 		MenuSite.addLine
+				(	this, "Grid", "Compose",
+						new ActionListener()
+						{	public void actionPerformed(ActionEvent e)
+						{	doCompose();
+						}
+						}
+				);
+
+		MenuSite.addLine
 		(	this, "Grid", "Exit",
 			new ActionListener()
 			{	public void actionPerformed(ActionEvent e)
@@ -203,6 +212,28 @@ public class Universe extends JPanel
 		{	JOptionPane.showMessageDialog( null, "Write Failed!",
 					"The Game of Life", JOptionPane.ERROR_MESSAGE);
 		}
+	}
+
+	private void doCompose()
+	{	try
+		{
+			FileInputStream in = new FileInputStream(
+					Files.userSelected(".", ".life", "Life File", "Load"));
+
+			Clock.instance().stop();        // stop the game and
+			outermostCell.clear();            // clear the board.
+
+			Storable memento = outermostCell.createMemento();
+			memento.load(in);
+			outermostCell.transfer(memento, new Point(0, 0), Cell.LOAD);
+
+			in.close();
+		}
+		catch (IOException theException) {
+			JOptionPane.showMessageDialog(null, "Compose Failed!",
+					"The Game of Life", JOptionPane.ERROR_MESSAGE);
+		}
+		repaint();
 	}
 
 	/** Override paint to ask the outermost Neighborhood
