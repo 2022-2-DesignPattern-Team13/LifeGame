@@ -128,7 +128,7 @@ public class Universe extends JPanel {
                 (this, "Grid", "Compose",
                         new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
-                                doCompose();
+                                ComposeWindow.instance().design();
                             }
                         }
                 );
@@ -187,6 +187,23 @@ public class Universe extends JPanel {
         repaint();
     }
 
+    private void doLoad(FileInputStream in) {
+        try {
+            Clock.instance().stop();        // stop the game and
+            outermostCell.clear();            // clear the board.
+
+            Storable memento = outermostCell.createMemento();
+            memento.load(in);
+            outermostCell.transfer(memento, new Point(0, 0), Cell.LOAD);
+
+            in.close();
+        } catch (IOException theException) {
+            JOptionPane.showMessageDialog(null, "Read Failed!",
+                    "The Game of Life", JOptionPane.ERROR_MESSAGE);
+        }
+        repaint();
+    }
+
     private void doStore() {
         try {
             FileOutputStream out = new FileOutputStream(
@@ -205,11 +222,7 @@ public class Universe extends JPanel {
         }
     }
 
-    private void doCompose() {
-        Window composeWindow = new ComposeWindow();
-    }
-
-    void doOper(FileInputStream[] fileInput) {
+    void doCompose(FileInputStream[] fileInput) {
         try {
             Clock.instance().stop();        // stop the game and
             outermostCell.clear();            // clear the board.
