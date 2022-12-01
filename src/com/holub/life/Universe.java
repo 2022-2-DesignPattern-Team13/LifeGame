@@ -139,6 +139,16 @@ public class Universe extends JPanel
 			}
 		);
 
+		MenuSite.addLine
+        (this, "Custom", "Color",
+				new ActionListener()
+                {
+					public void actionPerformed(ActionEvent e) {
+                        doColor();
+					}
+				}
+		);
+
 		Clock.instance().addClockListener //{=Universe.clock.subscribe}
 		(	new Clock.Listener()
 			{	public void tick()
@@ -204,6 +214,12 @@ public class Universe extends JPanel
 					"The Game of Life", JOptionPane.ERROR_MESSAGE);
 		}
 	}
+
+	private void doColor()
+	{
+        Color color = ColorChooser.userColorSelected();
+        Clock.instance().stop();
+    }
 
 	/** Override paint to ask the outermost Neighborhood
 	 *  (and any subcells) to draw themselves recursively.
