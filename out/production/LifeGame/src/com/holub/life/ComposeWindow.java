@@ -3,6 +3,7 @@ package com.holub.life;
 import com.holub.io.Files;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,8 +11,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-public class ComposeWindow extends JPanel {
-    private static final ComposeWindow theInstance = new ComposeWindow();
+public class ComposeWindow extends Window {
     String[] operators = {"AND", "OR", "XOR"};
     JLabel lblFileAName, lblFileBName;
     JTextField txtFileAName, txtFileBName;
@@ -19,16 +19,9 @@ public class ComposeWindow extends JPanel {
     JComboBox operCombo;
     FileInputStream[] fileInput = new FileInputStream[2];
 
-    private ComposeWindow() {
-        JFrame frame=new JFrame("compose window");
-        frame.getContentPane().add(this);//JFrame+JPanel(화면디자인)
-        frame.setBounds(200,300,430,300);//x,y,w,h
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);//X버튼 클릭시 종료
-    }
-
-    public static ComposeWindow instance() {
-        return theInstance;
+    public ComposeWindow() {
+        super("compose window");
+        design();
     }
 
     public void design() {
@@ -129,11 +122,21 @@ public class ComposeWindow extends JPanel {
         repaint();
     }
 
-    public void doCompose()
+    private void doCompose()
     {
-        // todo:연산
-
-
-        Universe.instance().doCompose(this.fileInput);
+        Universe.instance().doOper(this.fileInput);
     }
+//    private void doCompose()
+//    {	try
+//    {
+//        Universe.instance().doOper(this.fileInput);
+//
+////        in.close();
+//    }
+//    catch( IOException theException )
+//    {	JOptionPane.showMessageDialog( null, "Read Failed!",
+//            "The Game of Life", JOptionPane.ERROR_MESSAGE);
+//    }
+//        repaint();
+//    }
 }

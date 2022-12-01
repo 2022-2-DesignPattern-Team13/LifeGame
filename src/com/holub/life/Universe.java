@@ -8,6 +8,7 @@ import java.awt.event.*;
 
 import com.holub.io.Files;
 import com.holub.ui.MenuSite;
+import com.holub.ui.*;
 
 /**
  * The Universe is a mediator that sits between the Swing
@@ -222,7 +223,7 @@ public class Universe extends JPanel {
         }
     }
 
-    void doCompose(FileInputStream[] fileInput) {
+    public void doCompose(FileInputStream[] fileInput) {
         try {
             Clock.instance().stop();        // stop the game and
             outermostCell.clear();            // clear the board.
