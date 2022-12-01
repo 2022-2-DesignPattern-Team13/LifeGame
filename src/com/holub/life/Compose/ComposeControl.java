@@ -3,6 +3,7 @@ package com.holub.life.Compose;
 import com.holub.ui.ComposeWindow;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 
 public class ComposeControl {
 
@@ -22,7 +23,7 @@ public class ComposeControl {
         return Instance;
     }
 
-    public FileInputStream doCompose(FileInputStream[] fileInput, int commandNm) {
+    public FileInputStream doCompose(FileInputStream[] fileInput, int commandNm) throws IOException {
         return composeCommands[commandNm].execute(fileInput);
     }
 }

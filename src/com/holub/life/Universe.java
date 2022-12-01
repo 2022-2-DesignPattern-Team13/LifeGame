@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.event.*;
 
 import com.holub.io.Files;
+import com.holub.life.Compose.ComposeControl;
 import com.holub.ui.MenuSite;
 import com.holub.ui.*;
 
@@ -228,12 +229,15 @@ public class Universe extends JPanel {
             Clock.instance().stop();        // stop the game and
             outermostCell.clear();            // clear the board.
 
-            Storable memento = outermostCell.createMemento();
-            memento.load(fileInput[0]);
-            outermostCell.transfer(memento, new Point(0, 0), Cell.LOAD);
-
+            FileInputStream in=ComposeControl.getInstance().doCompose(fileInput,0);
             for (int i = 0; i < fileInput.length; i++)
                 fileInput[i].close();
+
+            Storable memento = outermostCell.createMemento();
+            memento.load(in);
+            outermostCell.transfer(memento, new Point(0, 0), Cell.LOAD);
+
+            in.close();
         } catch (IOException theException) {
             JOptionPane.showMessageDialog(null, "Read Failed!",
                     "The Game of Life", JOptionPane.ERROR_MESSAGE);
