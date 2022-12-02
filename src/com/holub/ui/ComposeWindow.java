@@ -14,7 +14,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 public class ComposeWindow extends JPanel {
-    private static final ComposeWindow theInstance = new ComposeWindow();
     private JFrame frame;
     String[] operators;
     JLabel lblFileAName, lblFileBName;
@@ -23,7 +22,7 @@ public class ComposeWindow extends JPanel {
     JComboBox operCombo;
     FileInputStream[] fileInput = new FileInputStream[2];
 
-    private ComposeWindow() {
+    public ComposeWindow() {
         frame=new JFrame("compose window");
         frame.getContentPane().add(this);//JFrame+JPanel(화면디자인)
         frame.setBounds(200,300,430,300);//x,y,w,h
@@ -31,10 +30,6 @@ public class ComposeWindow extends JPanel {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);//X버튼 클릭시 종료
 
         operators = ComposeControl.getInstance().getCommands();
-    }
-
-    public static ComposeWindow instance() {
-        return theInstance;
     }
 
     public void design() {
@@ -99,6 +94,7 @@ public class ComposeWindow extends JPanel {
         btnCompose.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 doCompose();
+                frame.dispose();
             }
         });
 
@@ -138,6 +134,5 @@ public class ComposeWindow extends JPanel {
     public void doCompose()
     {
         Universe.instance().doCompose(this.fileInput, operCombo.getSelectedIndex());
-        frame.dispose();
     }
 }

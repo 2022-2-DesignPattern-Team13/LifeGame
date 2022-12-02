@@ -130,7 +130,7 @@ public class Universe extends JPanel {
                 (this, "Grid", "Compose",
                         new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
-                                ComposeWindow.instance().design();
+                                (new ComposeWindow()).design();
                             }
                         }
                 );
