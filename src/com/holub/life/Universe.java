@@ -224,12 +224,12 @@ public class Universe extends JPanel {
         }
     }
 
-    public void doCompose(FileInputStream[] fileInput) {
+    public void doCompose(FileInputStream[] fileInput, int commandNm) {
         try {
             Clock.instance().stop();        // stop the game and
             outermostCell.clear();            // clear the board.
 
-            FileInputStream in=ComposeControl.getInstance().doCompose(fileInput,0);
+            FileInputStream in=ComposeControl.getInstance().doCompose(fileInput, commandNm);
             for (int i = 0; i < fileInput.length; i++)
                 fileInput[i].close();
 

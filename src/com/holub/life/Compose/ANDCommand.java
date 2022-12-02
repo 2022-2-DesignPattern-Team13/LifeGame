@@ -6,6 +6,7 @@ import java.util.*;
 public class ANDCommand implements ComposeCommand{
 
     private static ANDCommand Instance;
+    private static final String name = "AND";
 
     private ANDCommand(){}
 
@@ -16,6 +17,11 @@ public class ANDCommand implements ComposeCommand{
         }
         return Instance;
     }
+
+    public String getName(){
+        return name;
+    }
+
     @Override
     public FileInputStream execute(FileInputStream[] fileInput) throws IOException{
 

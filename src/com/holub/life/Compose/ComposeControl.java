@@ -26,4 +26,12 @@ public class ComposeControl {
     public FileInputStream doCompose(FileInputStream[] fileInput, int commandNm) throws IOException {
         return composeCommands[commandNm].execute(fileInput);
     }
+
+    public String[] getCommands(){
+        String[] commands = new String[composeCommands.length];
+        for (int i=0;i<composeCommands.length;i++){
+            commands[i] = composeCommands[i].getName();
+        }
+        return commands;
+    }
 }

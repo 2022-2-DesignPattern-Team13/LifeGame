@@ -1,6 +1,8 @@
 package com.holub.ui;
 
 import com.holub.io.Files;
+import com.holub.life.Compose.ComposeCommand;
+import com.holub.life.Compose.ComposeControl;
 import com.holub.life.Universe;
 
 import javax.swing.*;
@@ -14,7 +16,7 @@ import java.io.IOException;
 public class ComposeWindow extends JPanel {
     private static final ComposeWindow theInstance = new ComposeWindow();
     private JFrame frame;
-    String[] operators = {"AND", "OR", "XOR"};
+    String[] operators;
     JLabel lblFileAName, lblFileBName;
     JTextField txtFileAName, txtFileBName;
     JButton btnCompose, btnLoadFileA, btnLoadFileB;
@@ -27,6 +29,8 @@ public class ComposeWindow extends JPanel {
         frame.setBounds(200,300,430,300);//x,y,w,h
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);//X버튼 클릭시 종료
+
+        operators = ComposeControl.getInstance().getCommands();
     }
 
     public static ComposeWindow instance() {
@@ -133,10 +137,7 @@ public class ComposeWindow extends JPanel {
 
     public void doCompose()
     {
-        // todo:연산
-
-
-        Universe.instance().doCompose(this.fileInput);
+        Universe.instance().doCompose(this.fileInput, operCombo.getSelectedIndex());
         frame.dispose();
     }
 }

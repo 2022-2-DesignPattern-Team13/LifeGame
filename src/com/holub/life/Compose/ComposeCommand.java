@@ -6,4 +6,5 @@ import java.io.IOException;
 public interface ComposeCommand {
 
     public FileInputStream execute(FileInputStream[] fileInput) throws IOException;
+    String getName();
 }
