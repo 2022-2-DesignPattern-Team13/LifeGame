@@ -13,6 +13,7 @@ import java.io.IOException;
 
 public class ComposeWindow extends JPanel {
     private static final ComposeWindow theInstance = new ComposeWindow();
+    private JFrame frame;
     String[] operators = {"AND", "OR", "XOR"};
     JLabel lblFileAName, lblFileBName;
     JTextField txtFileAName, txtFileBName;
@@ -21,7 +22,7 @@ public class ComposeWindow extends JPanel {
     FileInputStream[] fileInput = new FileInputStream[2];
 
     private ComposeWindow() {
-        JFrame frame=new JFrame("compose window");
+        frame=new JFrame("compose window");
         frame.getContentPane().add(this);//JFrame+JPanel(화면디자인)
         frame.setBounds(200,300,430,300);//x,y,w,h
         frame.setVisible(true);
@@ -136,5 +137,6 @@ public class ComposeWindow extends JPanel {
 
 
         Universe.instance().doCompose(this.fileInput);
+        frame.dispose();
     }
 }
