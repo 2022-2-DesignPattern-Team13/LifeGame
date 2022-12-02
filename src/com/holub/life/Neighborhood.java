@@ -437,6 +437,11 @@ public final class Neighborhood implements Cell
 		amActive = false;
 	}
 
+	@Override
+	public void setWillBeAlive(boolean b) {
+
+	}
+
 	/** Cause subcells to add an annotation to the indicated
 	 *  memento if they happen to be alive.
 	 */
@@ -478,7 +483,7 @@ public final class Neighborhood implements Cell
 	 * rewrite load() and flush() to use XML.
 	 */
 
-	private static class NeighborhoodState implements Cell.Memento
+	private static class NeighborhoodState implements Memento
 	{	Collection liveCells = new LinkedList();
 
 		public NeighborhoodState( InputStream in ) throws IOException

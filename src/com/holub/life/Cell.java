@@ -86,6 +86,8 @@ public interface Cell
 
 	void clear();
 
+	void setWillBeAlive(boolean b);
+
 	/**
 	 *	The Cell.Memento interface stores the state
 	 *	of a Cell and all its subcells for future restoration.
@@ -126,6 +128,7 @@ public interface Cell
 	 */
 	Storable createMemento();
 
+
 	/** The DUMMY Singleton represents a permanently dead (thus stable)
 	 * 	cell. It's used for the edges of the grid. It's a singleton.
 	 * 	The Dummy class is private, but it is accessed through
@@ -145,6 +148,12 @@ public interface Cell
 		public Cell 	 create()	   	   	{return this;			  }
 		public Direction isDisruptiveTo()	{return Direction.NONE;	  }
 		public void 	 clear()		   	{						  }
+
+		@Override
+		public void setWillBeAlive(boolean b) {
+
+		}
+
 		public int 		 widthInCells()  	{return 0;				  }
 		public boolean	 transition()		{return false;			  }
 

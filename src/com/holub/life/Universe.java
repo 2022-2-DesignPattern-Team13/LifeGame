@@ -5,6 +5,7 @@ import java.io.*;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 import com.holub.io.Files;
 import com.holub.ui.MenuSite;
@@ -53,11 +54,37 @@ public class Universe extends JPanel
 		// miserably if the overall size of the grid is too big to fit
 		// on the screen.
 
+		ArrayList<Rule> defaultRules = new ArrayList<>();
+
+		// default rule0 : 주변에 2,3개 살아있지 않으면 죽음.
+		Behaviour behaviour0 = new DieBehaviour();
+		ArrayList<ConditionComponent> conditions0 = new ArrayList<>();
+		defaultRules.add(new Rule(conditions0, behaviour0));
+
+		// default rule 1: 주변에 3개가 살아있으면 내가 살아남
+		ArrayList<ConditionComponent> conditions1 = new ArrayList<>();
+		ConditionItem condition1 = new NeighborCountCondition(3, new CompareEqual());
+		conditions1.add(condition1);
+		Behaviour behaviour1 = new DeadToAliveBehaviour();
+		defaultRules.add(new Rule(conditions1, behaviour1));
+
+//		// default rule 2: 주변에 2개가 살아있으면 살아있는 채로 유지
+//		ArrayList<ConditionComponent> conditions2 = new ArrayList<>();
+//		ConditionItem condition2 = new NeighborCountCondition(2, new CompareEqual());
+//		ConditionItem condition3 = new NeighborCountCondition(3, new CompareEqual());
+//		ConditionComponent conditionComp = new ConditionComponent();
+//		conditionComp.add(condition2);
+//		conditionComp.add(condition3);
+//		conditionComp.setOperation(new LogicalOr());
+//		conditions2.add(condition2);
+//		Behaviour behaviour2 = new StayAliveBehaviour();
+//		defaultRules.add(new Rule(conditions2, behaviour2));
+
 		outermostCell = new Neighborhood
 						(	DEFAULT_GRID_SIZE,
 							new Neighborhood
 							(	DEFAULT_GRID_SIZE,
-								new Resident()
+								new Resident(defaultRules)
 							)
 						);
 
@@ -137,6 +164,26 @@ public class Universe extends JPanel
 		        {	System.exit(0);
 		        }
 			}
+		);
+
+		MenuSite.addLine(
+				this, "Custom", "Color",
+				new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+
+					}
+				}
+		);
+
+		MenuSite.addLine(
+				this, "Custom", "Rule",
+				new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+
+					}
+				}
 		);
 
 		Clock.instance().addClockListener //{=Universe.clock.subscribe}
