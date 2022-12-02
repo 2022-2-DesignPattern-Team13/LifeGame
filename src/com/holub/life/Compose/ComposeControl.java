@@ -11,8 +11,9 @@ public class ComposeControl {
     private static ComposeControl Instance;
 
     private ComposeControl() {
-        composeCommands = new ComposeCommand[1];
+        composeCommands = new ComposeCommand[2];
         composeCommands[0] = ANDCommand.getInstance();
+        composeCommands[1]=ORCommand.getInstance();
     }
 
     public static ComposeControl getInstance() {
