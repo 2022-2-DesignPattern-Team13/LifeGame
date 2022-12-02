@@ -11,9 +11,10 @@ public class ComposeControl {
     private static ComposeControl Instance;
 
     private ComposeControl() {
-        composeCommands = new ComposeCommand[2];
+        composeCommands = new ComposeCommand[3];
         composeCommands[0] = ANDCommand.getInstance();
         composeCommands[1]=ORCommand.getInstance();
+        composeCommands[2]=XORCommand.getInstance();
     }
 
     public static ComposeControl getInstance() {
