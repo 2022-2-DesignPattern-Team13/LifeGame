@@ -7,13 +7,9 @@ import javax.swing.*;
 import java.awt.event.*;
 
 import com.holub.io.Files;
+import com.holub.life.Compose.ComposeControl;
 import com.holub.ui.MenuSite;
-
-import com.holub.life.Cell;
-import com.holub.life.Storable;
-import com.holub.life.Clock;
-import com.holub.life.Neighborhood;
-import com.holub.life.Resident;
+import com.holub.ui.*;
 
 /**
  * The Universe is a mediator that sits between the Swing
@@ -138,6 +134,17 @@ public class Universe extends JPanel
 		        }
 			}
 		);
+    
+    
+
+    MenuSite.addLine
+                (this, "Grid", "Compose",
+                        new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                (new ComposeWindow()).design();
+                            }
+                        }
+                );
 
 		MenuSite.addLine
         (this, "Custom", "Color",
@@ -194,6 +201,23 @@ public class Universe extends JPanel
 		}
 		repaint();
 	}
+  
+  private void doLoad(FileInputStream in) {
+        try {
+            Clock.instance().stop();        // stop the game and
+            outermostCell.clear();            // clear the board.
+
+            Storable memento = outermostCell.createMemento();
+            memento.load(in);
+            outermostCell.transfer(memento, new Point(0, 0), Cell.LOAD);
+
+            in.close();
+        } catch (IOException theException) {
+            JOptionPane.showMessageDialog(null, "Read Failed!",
+                    "The Game of Life", JOptionPane.ERROR_MESSAGE);
+        }
+        repaint();
+    }
 
 	private void doStore()
 	{	try
@@ -214,6 +238,27 @@ public class Universe extends JPanel
 					"The Game of Life", JOptionPane.ERROR_MESSAGE);
 		}
 	}
+  
+  public void doCompose(FileInputStream[] fileInput, int commandNm) {
+        try {
+            Clock.instance().stop();        // stop the game and
+            outermostCell.clear();            // clear the board.
+
+            FileInputStream in=ComposeControl.getInstance().doCompose(fileInput, commandNm);
+            for (int i = 0; i < fileInput.length; i++)
+                fileInput[i].close();
+
+            Storable memento = outermostCell.createMemento();
+            memento.load(in);
+            outermostCell.transfer(memento, new Point(0, 0), Cell.LOAD);
+
+            in.close();
+        } catch (IOException theException) {
+            JOptionPane.showMessageDialog(null, "Read Failed!",
+                    "The Game of Life", JOptionPane.ERROR_MESSAGE);
+        }
+        repaint();
+    }
 
 	private void doColor()
 	{
