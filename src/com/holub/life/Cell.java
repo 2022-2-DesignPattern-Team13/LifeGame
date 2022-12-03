@@ -1,7 +1,7 @@
 package com.holub.life;
 import java.awt.*;
 
-import com.holub.life.Storable;
+import com.holub.rule.Neighborhood;
 
 /***
  * This interface is the basic unit that comprises a life board.

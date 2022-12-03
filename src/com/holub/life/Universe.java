@@ -5,16 +5,10 @@ import java.io.*;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 
 import com.holub.io.Files;
+import com.holub.rule.*;
 import com.holub.ui.MenuSite;
-
-import com.holub.life.Cell;
-import com.holub.life.Storable;
-import com.holub.life.Clock;
-import com.holub.life.Neighborhood;
-import com.holub.life.Resident;
 
 /**
  * The Universe is a mediator that sits between the Swing
