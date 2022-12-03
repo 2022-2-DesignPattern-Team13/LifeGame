@@ -50,19 +50,23 @@ public class Universe extends JPanel
 
 		Rule defaultRules = new Rule();
 
-		// default rule 1: 주변에 3개가 살아있으면 내가 살아남, 2개가 살아있고 나도 살아있으면 살아있는 상태 유지
-		ConditionComponent conditions = new Condition(new LogicalOr());
-		conditions.addCondition(new NeighborCountCondition(3, new CompareEqual()));
+//		// default rule: (주변에 3개가 살아있거나) (주변 2개가 살아있고 나도 살아있으면) 다음 턴에 살아있음
+//		ConditionComponent conditions = new Condition(new LogicalOr());
+//		conditions.addCondition(new NeighborCountCondition(3, new CompareEqual()));
+//
+//		ConditionComponent conditions2 = new Condition(new LogicalAnd());
+//		conditions2.addCondition(new AliveCondition(true, new CompareEqual()));
+//		conditions2.addCondition(new NeighborCountCondition(2, new CompareEqual()));
+//
+//		conditions.addCondition(conditions2);
+//		defaultRules.addRule(new RuleItem(conditions, new AliveBehaviour()));
 
-		ConditionComponent conditions2 = new Condition(new LogicalAnd());
-		conditions2.addCondition(new AliveCondition(true, new CompareEqual()));
-		conditions2.addCondition(new NeighborCountCondition(2, new CompareEqual()));
 
-		conditions.addCondition(conditions2);
-		defaultRules.addRule(new RuleItem(conditions, new StayAliveBehaviour()));
+		ConditionComponent conditions = new Condition(new LogicalAnd());
+		conditions.addCondition(new NeighborLocationCondition("north", true));
+		conditions.addCondition(new NeighborLocationCondition("south", true));
+		defaultRules.addRule(new RuleItem(conditions, new AliveBehaviour()));
 
-		// default rule0 : 주변에 2,3개 살아있지 않으면 죽음.
-		defaultRules.addRule(new RuleItem(new Condition(new NullLogicalOperation()), new DieBehaviour()));
 
 
 		outermostCell = new Neighborhood
@@ -166,7 +170,7 @@ public class Universe extends JPanel
 				new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-
+						new RuleFrame();
 					}
 				}
 		);
@@ -194,7 +198,6 @@ public class Universe extends JPanel
 	public static Universe instance()
 	{	return theInstance;
 	}
-
 	private void doLoad()
 	{	try
 		{

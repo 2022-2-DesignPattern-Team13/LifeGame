@@ -6,7 +6,6 @@ import com.holub.rule.LogicalOperation;
 
 import java.util.ArrayList;
 
-
 public class Condition extends ConditionComponent {
     private ArrayList<ConditionComponent> conditionComponents;
     private LogicalOperation operation;

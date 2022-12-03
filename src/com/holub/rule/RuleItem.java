@@ -17,4 +17,14 @@ public class RuleItem extends RuleComponent {
         }
         return false;
     }
+
+    @Override
+    public void addRule(RuleComponent ruleComponent) {
+        return;
+    }
+
+    @Override
+    public void addRule(int index, RuleComponent ruleComponent) {
+        return;
+    }
 }
