@@ -1,14 +1,11 @@
 package com.holub.life;
 
 import java.awt.*;
-import javax.swing.*;
+
+import com.holub.rule.RuleComponent;
 import com.holub.ui.Colors;	// Contains constants specifying various
 							// colors not defined in java.awt.Color.
-import com.holub.life.Cell;
-import com.holub.life.Storable;
-import com.holub.life.Direction;
-import com.holub.life.Neighborhood;
-import com.holub.life.Universe;
+
 
 /*** ****************************************************************
  * The Resident class implements a single cell---a "resident" of a
@@ -19,12 +16,18 @@ import com.holub.life.Universe;
 
 public final class Resident implements Cell
 {
+	private RuleComponent rules;
+
 	private static final Color BORDER_COLOR = Colors.DARK_YELLOW;
 	private static final Color LIVE_COLOR 	= Color.RED;
 	private static final Color DEAD_COLOR   = Colors.LIGHT_YELLOW;
 
 	private boolean amAlive 	= false;
 	private boolean willBeAlive	= false;
+
+	public Resident(RuleComponent rules){
+		this.rules = rules;
+	}
 
 	private boolean isStable(){return amAlive == willBeAlive; }
 
@@ -47,18 +50,21 @@ public final class Resident implements Cell
 		verify( southeast,	"southeast" );
 		verify( southwest,	"southwest" );
 
-		int neighbors = 0;
+//		int neighbors = 0;
+//
+//		if( north.	  isAlive()) ++neighbors;
+//		if( south.	  isAlive()) ++neighbors;
+//		if( east. 	  isAlive()) ++neighbors;
+//		if( west. 	  isAlive()) ++neighbors;
+//		if( northeast.isAlive()) ++neighbors;
+//		if( northwest.isAlive()) ++neighbors;
+//		if( southeast.isAlive()) ++neighbors;
+//		if( southwest.isAlive()) ++neighbors;
+		
+		rules.apply(this, north, south, east, west, northeast, northwest, southeast, southwest);
 
-		if( north.	  isAlive()) ++neighbors;
-		if( south.	  isAlive()) ++neighbors;
-		if( east. 	  isAlive()) ++neighbors;
-		if( west. 	  isAlive()) ++neighbors;
-		if( northeast.isAlive()) ++neighbors;
-		if( northwest.isAlive()) ++neighbors;
-		if( southeast.isAlive()) ++neighbors;
-		if( southwest.isAlive()) ++neighbors;
 
-		willBeAlive = (neighbors==3 || (amAlive && neighbors==2));
+//		willBeAlive = (neighbors==3 || (amAlive && neighbors==2));
 		return !isStable();
 	}
 
@@ -103,8 +109,14 @@ public final class Resident implements Cell
 	}
 
 	public void	   clear()			{amAlive = willBeAlive = false; }
+
+	@Override
+	public void setWillBeAlive(boolean b) {
+		willBeAlive = b;
+	}
+
 	public boolean isAlive()		{return amAlive;			    }
-	public Cell    create()			{return new Resident();			}
+	public Cell    create()			{return new Resident(this.rules);			}
 	public int 	   widthInCells()	{return 1;}
 
 	public Direction isDisruptiveTo()

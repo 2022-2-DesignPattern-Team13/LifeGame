@@ -1,19 +1,13 @@
-package com.holub.life;
+package com.holub.rule;
 
 import java.awt.*;
-import java.awt.event.*;
 import java.util.*;
 import java.io.*;
-import javax.swing.*;
 
-import com.holub.io.Files;
 import com.holub.life.Cell;
-import com.holub.ui.MenuSite;
 import com.holub.ui.Colors;
 import com.holub.asynch.ConditionVariable;
 
-import com.holub.life.Cell;
-import com.holub.life.Clock;
 import com.holub.life.Direction;
 import com.holub.life.Storable;
 
@@ -437,6 +431,11 @@ public final class Neighborhood implements Cell
 		amActive = false;
 	}
 
+	@Override
+	public void setWillBeAlive(boolean b) {
+
+	}
+
 	/** Cause subcells to add an annotation to the indicated
 	 *  memento if they happen to be alive.
 	 */
@@ -478,7 +477,7 @@ public final class Neighborhood implements Cell
 	 * rewrite load() and flush() to use XML.
 	 */
 
-	private static class NeighborhoodState implements Cell.Memento
+	private static class NeighborhoodState implements Memento
 	{	Collection liveCells = new LinkedList();
 
 		public NeighborhoodState( InputStream in ) throws IOException

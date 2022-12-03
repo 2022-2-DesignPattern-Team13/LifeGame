@@ -7,8 +7,10 @@ import javax.swing.*;
 import java.awt.event.*;
 
 import com.holub.io.Files;
-import com.holub.life.Compose.ComposeControl;
+
+import com.holub.rule.*;
 import com.holub.ui.MenuSite;
+import com.holub.life.Compose.ComposeControl;
 import com.holub.ui.*;
 
 /**
@@ -49,11 +51,32 @@ public class Universe extends JPanel
 		// miserably if the overall size of the grid is too big to fit
 		// on the screen.
 
+		Rule defaultRules = new Rule();
+
+		// default rule: (주변에 3개가 살아있거나) (주변 2개가 살아있고 나도 살아있으면) 다음 턴에 살아있음
+		ConditionComponent conditions = new Condition(new LogicalOr());
+		conditions.addCondition(new NeighborCountCondition(3, new CompareEqual()));
+
+		ConditionComponent conditions2 = new Condition(new LogicalAnd());
+		conditions2.addCondition(new AliveCondition(true, new CompareEqual()));
+		conditions2.addCondition(new NeighborCountCondition(2, new CompareEqual()));
+
+		conditions.addCondition(conditions2);
+		defaultRules.addRule(new RuleItem(conditions, new AliveBehaviour()));
+
+
+//		ConditionComponent conditions = new Condition(new LogicalAnd());
+//		conditions.addCondition(new NeighborLocationCondition("north", true));
+//		conditions.addCondition(new NeighborLocationCondition("south", true));
+//		defaultRules.addRule(new RuleItem(conditions, new AliveBehaviour()));
+
+
+
 		outermostCell = new Neighborhood
 						(	DEFAULT_GRID_SIZE,
 							new Neighborhood
 							(	DEFAULT_GRID_SIZE,
-								new Resident()
+								new Resident(defaultRules)
 							)
 						);
 
@@ -156,6 +179,16 @@ public class Universe extends JPanel
 				}
 		);
 
+		MenuSite.addLine(
+				this, "Custom", "Rule",
+				new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						new RuleFrame();
+					}
+				}
+		);
+
 		Clock.instance().addClockListener //{=Universe.clock.subscribe}
 		(	new Clock.Listener()
 			{	public void tick()
@@ -179,7 +212,6 @@ public class Universe extends JPanel
 	public static Universe instance()
 	{	return theInstance;
 	}
-
 	private void doLoad()
 	{	try
 		{
