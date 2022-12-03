@@ -2,9 +2,10 @@ package com.holub.life.Compose;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Collection;
 
 public interface ComposeCommand {
 
-    public FileInputStream execute(FileInputStream[] fileInput) throws IOException;
+    public Collection execute(Collection cell1, Collection cell2) throws IOException;
     String getName();
 }

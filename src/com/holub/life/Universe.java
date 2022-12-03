@@ -127,6 +127,15 @@ public class Universe extends JPanel
 		);
 
 		MenuSite.addLine
+				(this, "Grid", "Compose",
+						new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								(new ComposeWindow()).design();
+							}
+						}
+				);
+
+		MenuSite.addLine
 		(	this, "Grid", "Exit",
 			new ActionListener()
 			{	public void actionPerformed(ActionEvent e)
@@ -134,17 +143,6 @@ public class Universe extends JPanel
 		        }
 			}
 		);
-    
-    
-
-    MenuSite.addLine
-                (this, "Grid", "Compose",
-                        new ActionListener() {
-                            public void actionPerformed(ActionEvent e) {
-                                (new ComposeWindow()).design();
-                            }
-                        }
-                );
 
 		MenuSite.addLine
         (this, "Custom", "Color",
