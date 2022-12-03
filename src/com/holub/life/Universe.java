@@ -53,22 +53,22 @@ public class Universe extends JPanel
 
 		Rule defaultRules = new Rule();
 
-//		// default rule: (주변에 3개가 살아있거나) (주변 2개가 살아있고 나도 살아있으면) 다음 턴에 살아있음
-//		ConditionComponent conditions = new Condition(new LogicalOr());
-//		conditions.addCondition(new NeighborCountCondition(3, new CompareEqual()));
-//
-//		ConditionComponent conditions2 = new Condition(new LogicalAnd());
-//		conditions2.addCondition(new AliveCondition(true, new CompareEqual()));
-//		conditions2.addCondition(new NeighborCountCondition(2, new CompareEqual()));
-//
-//		conditions.addCondition(conditions2);
-//		defaultRules.addRule(new RuleItem(conditions, new AliveBehaviour()));
+		// default rule: (주변에 3개가 살아있거나) (주변 2개가 살아있고 나도 살아있으면) 다음 턴에 살아있음
+		ConditionComponent conditions = new Condition(new LogicalOr());
+		conditions.addCondition(new NeighborCountCondition(3, new CompareEqual()));
 
+		ConditionComponent conditions2 = new Condition(new LogicalAnd());
+		conditions2.addCondition(new AliveCondition(true, new CompareEqual()));
+		conditions2.addCondition(new NeighborCountCondition(2, new CompareEqual()));
 
-		ConditionComponent conditions = new Condition(new LogicalAnd());
-		conditions.addCondition(new NeighborLocationCondition("north", true));
-		conditions.addCondition(new NeighborLocationCondition("south", true));
+		conditions.addCondition(conditions2);
 		defaultRules.addRule(new RuleItem(conditions, new AliveBehaviour()));
+
+
+//		ConditionComponent conditions = new Condition(new LogicalAnd());
+//		conditions.addCondition(new NeighborLocationCondition("north", true));
+//		conditions.addCondition(new NeighborLocationCondition("south", true));
+//		defaultRules.addRule(new RuleItem(conditions, new AliveBehaviour()));
 
 
 
