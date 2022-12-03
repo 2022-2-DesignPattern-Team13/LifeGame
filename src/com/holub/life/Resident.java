@@ -20,7 +20,7 @@ import com.holub.life.Universe;
 
 public final class Resident implements Cell
 {
-	private ArrayList<Rule> rules;
+	private RuleComponent rules;
 
 	private static final Color BORDER_COLOR = Colors.DARK_YELLOW;
 	private static final Color LIVE_COLOR 	= Color.RED;
@@ -29,7 +29,7 @@ public final class Resident implements Cell
 	private boolean amAlive 	= false;
 	private boolean willBeAlive	= false;
 
-	public Resident(ArrayList<Rule> rules){
+	public Resident(RuleComponent rules){
 		this.rules = rules;
 	}
 
@@ -65,8 +65,8 @@ public final class Resident implements Cell
 //		if( southeast.isAlive()) ++neighbors;
 //		if( southwest.isAlive()) ++neighbors;
 		
-		for(Rule rule : rules)
-			rule.apply(this, north,south, east,west,northeast,northwest, southeast,southwest );
+		rules.apply(this, north, south, east, west, northeast, northwest, southeast, southwest);
+
 
 //		willBeAlive = (neighbors==3 || (amAlive && neighbors==2));
 		return !isStable();

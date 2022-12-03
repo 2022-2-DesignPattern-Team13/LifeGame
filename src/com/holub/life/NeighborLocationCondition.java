@@ -4,14 +4,13 @@ public class NeighborLocationCondition extends ConditionItem{
 
     private String location;
     private boolean isLocationAlive;
-
     public NeighborLocationCondition(String location, boolean isLocationAlive){
         this.location = location;
         this.isLocationAlive = isLocationAlive;
     }
 
     @Override
-    public boolean check(Cell north, Cell south, Cell east, Cell west, Cell northeast, Cell northwest, Cell southeast, Cell southwest) {
+    public boolean check(Cell cell, Cell north, Cell south, Cell east, Cell west, Cell northeast, Cell northwest, Cell southeast, Cell southwest) {
         if(location.equals("north")){
             return isLocationAlive == north.isAlive();
         }else if(location.equals("south")){
