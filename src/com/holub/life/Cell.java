@@ -1,7 +1,7 @@
 package com.holub.life;
 import java.awt.*;
 
-import com.holub.rule.Neighborhood;
+import com.holub.rule.Rule;
 
 /***
  * This interface is the basic unit that comprises a life board.
@@ -88,6 +88,9 @@ public interface Cell
 
 	void setWillBeAlive(boolean b);
 
+	void setRule(Rule rule);
+
+
 	/**
 	 *	The Cell.Memento interface stores the state
 	 *	of a Cell and all its subcells for future restoration.
@@ -151,6 +154,11 @@ public interface Cell
 
 		@Override
 		public void setWillBeAlive(boolean b) {
+
+		}
+
+		@Override
+		public void setRule(Rule rule) {
 
 		}
 
