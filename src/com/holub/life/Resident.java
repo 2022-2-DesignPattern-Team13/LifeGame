@@ -2,6 +2,7 @@ package com.holub.life;
 
 import java.awt.*;
 
+import com.holub.rule.Rule;
 import com.holub.rule.RuleComponent;
 import com.holub.ui.Colors;	// Contains constants specifying various
 							// colors not defined in java.awt.Color.
@@ -142,5 +143,9 @@ public final class Resident implements Cell
 	public Storable createMemento()
 	{	throw new UnsupportedOperationException(
 					"May not create memento of a unitary cell");
+	}
+
+	public void setRule(RuleComponent rule){
+		this.rules = rule;
 	}
 }

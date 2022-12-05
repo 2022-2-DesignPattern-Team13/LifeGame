@@ -13,4 +13,8 @@ public class ConditionComponent {
         return;
     }
 
+    public String toString(){
+        return "";
+    }
+
 }

@@ -10,4 +10,8 @@ public class CompareEqualOrMoreThan implements Compare {
     public boolean compare(boolean a, boolean b) {
         return a==b;
     }
+
+    public String toString(){
+        return "equal or more than";
+    }
 }

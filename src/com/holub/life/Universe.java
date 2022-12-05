@@ -9,6 +9,7 @@ import java.awt.event.*;
 import com.holub.io.Files;
 
 import com.holub.rule.*;
+import com.holub.rule.ui.RuleFrame;
 import com.holub.ui.MenuSite;
 import com.holub.life.Compose.ComposeControl;
 import com.holub.ui.*;
@@ -184,7 +185,7 @@ public class Universe extends JPanel
 				new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						new RuleFrame();
+						doRule();
 					}
 				}
 		);
@@ -297,6 +298,13 @@ public class Universe extends JPanel
         Color color = ColorChooser.userColorSelected();
         Clock.instance().stop();
     }
+
+	private void doRule(){
+		// new Rule부분은 화면에서 받아온 rule로 교체 예정
+//		Command command = new SetRuleCommand(new Rule());
+//		command.execute(outermostCell);
+		new RuleFrame();
+	}
 
 	/** Override paint to ask the outermost Neighborhood
 	 *  (and any subcells) to draw themselves recursively.

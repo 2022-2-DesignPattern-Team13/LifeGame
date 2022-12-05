@@ -12,4 +12,10 @@ public class LogicalAnd implements LogicalOperation {
     public boolean operate(boolean c) {
         return c;
     }
+
+
+    @Override
+    public String toString() {
+        return "&&";
+    }
 }
