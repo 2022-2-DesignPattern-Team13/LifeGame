@@ -1,5 +1,7 @@
 package com.holub.ui.rule;
 
+import com.holub.rule.ConditionComponent;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -39,6 +41,10 @@ public class ConditionEditorPanel extends JPanel {
         this.setLayout(new BorderLayout());
         this.add(conditionResultPanel, BorderLayout.SOUTH);
         this.add(conditionGridPanel, BorderLayout.CENTER);
+    }
+
+    public ConditionComponent getCreatedComponent() {
+        return conditionResultPanel.getCreatedCondition();
     }
 
     private boolean checkValidness(){

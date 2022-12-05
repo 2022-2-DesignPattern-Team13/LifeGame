@@ -1,5 +1,8 @@
 package com.holub.ui.rule;
 
+import com.holub.rule.Behaviour;
+import com.holub.rule.ConditionComponent;
+
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
@@ -12,6 +15,13 @@ public class RuleFrame extends JFrame {
 
     private BehaviourPanel behaviourPanel;
 
+    private ConditionEditorPanel conditionEditorPanel;
+
+
+    private ConditionComponent createdRule;
+
+    private String selectedBehavior;
+
     public RuleFrame() {
         super("Rule");
 
@@ -20,7 +30,7 @@ public class RuleFrame extends JFrame {
         conditionContainPanel.setLayout(new BorderLayout());
         conditionContainPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 20, 0));
 
-        ConditionEditorPanel conditionEditorPanel = new ConditionEditorPanel();
+        conditionEditorPanel = new ConditionEditorPanel();
         conditionEditorPanel.setBorder(new TitledBorder(
                 null,
                 "Make your own Custom Condition",
@@ -40,40 +50,49 @@ public class RuleFrame extends JFrame {
         ruleListPanel.setLayout(new GridLayout(0, 1));
         ruleListPanel.setBackground(Color.white);
         ruleListPanel.setBorder(BorderFactory.createEmptyBorder(30, 200, 30, 200));
-        JLabel dummyText = new JLabel("When !@duse djifdj dijf, Cell is die");
-        JLabel dummyText2 = new JLabel("When1111 !@duse djifdj dijf, Cell is die");
-        ruleListPanel.add(dummyText);
-        ruleListPanel.add(dummyText2);
 
 
         // 최종 Rule 적용 button
         JButton applyRuleButton = new JButton("Apply Custom Rule >>");
 
 
-        JPanel panel1 = new JPanel();
-        panel1.add(conditionContainPanel);
-        panel1.add(addRuleButton);
+        JPanel conditionSettingPanel = new JPanel();
+        conditionSettingPanel.add(conditionContainPanel);
+        conditionSettingPanel.add(addRuleButton);
 
-        JPanel panel2 = new JPanel();
-        panel2.add(ruleListPanel);
-        panel2.add(applyRuleButton);
 
         // JFrame 설정
-        setVisible(true);
-        setSize(800, 800);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
+        this.setVisible(true);
+        this.setSize(800, 800);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
 
-        add(panel1);
-        add(panel2);
+        this.add(conditionSettingPanel);
+        this.add(ruleListPanel);
+        this.add(new JPanel().add(applyRuleButton));
     }
 
     private void setAddRuleBtnActionListener(JButton button) {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JLabel dummyText = new JLabel("New Dummy Text add!");
-                ruleListPanel.add(dummyText);
+                createdRule = conditionEditorPanel.getCreatedComponent();
+                JLabel labelRule = new JLabel(createdRule.toString());
+                labelRule.setFont(new Font(null, Font.BOLD, 13));
+
+                selectedBehavior = "Die!!!!";
+                JLabel labelBehavior = new JLabel(selectedBehavior.toString());
+                labelBehavior.setFont(new Font(null, Font.BOLD, 13));
+
+                JPanel ruleLabelPanel = new JPanel();
+                ruleLabelPanel.setLayout(new FlowLayout());
+                ruleLabelPanel.add(new JLabel("Rule: "));
+                ruleLabelPanel.add(labelRule);
+                ruleLabelPanel.add(new JLabel(", when cell is "));
+                ruleLabelPanel.add(labelBehavior);
+
+
+                ruleListPanel.add(ruleLabelPanel);
                 revalidate();
                 repaint();
             }

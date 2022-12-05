@@ -13,6 +13,7 @@ public class ConditionResultPanel extends JPanel {
     private ArrayList<Object> conditionResult;
     private JButton checkValidnessButton;
     private JTextField validnessResult;
+    private ConditionComponent createdCondition;
     public ConditionResultPanel(){
         conditionResult = new ArrayList<>();
 
@@ -28,14 +29,20 @@ public class ConditionResultPanel extends JPanel {
                 ConditionComponent conditionComponent = makeConditionComponent();
                 if(conditionComponent == null)
                     validnessResult.setText("not valid");
-                else
+                else {
                     validnessResult.setText("valid");
+                    createdCondition = conditionComponent;
+                }
                 revalidate();
                 repaint();
             }
         });
         add(checkValidnessButton);
         add(validnessResult);
+    }
+
+    public ConditionComponent getCreatedCondition() {
+        return createdCondition;
     }
 
     public void addResult(Object o){
