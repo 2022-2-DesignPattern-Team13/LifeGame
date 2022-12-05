@@ -15,7 +15,12 @@ public class Condition extends ConditionComponent {
     }
 
     public boolean checkIsValid(){
-        if((operation == null && conditionComponents.size() == 2) || (conditionComponents.size()>2))
+        if(operation == null && conditionComponents.size() == 2)
+            return false;
+        if(conditionComponents.size() > 2)
+            return false;
+
+        if(!(operation instanceof NullLogicalOperation) && conditionComponents.size() == 1)
             return false;
 
         for(ConditionComponent conditionComponent : conditionComponents){

@@ -22,7 +22,7 @@ public class NeighbourCountConditionPanel extends JPanel {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                resultPanel.addResult(targetCountPanel.getSelected());
+                resultPanel.addResult(new NeighborCountCondition(targetCountPanel.getSelected(), comparePanel.getSelected()));
             }
         });
 
@@ -30,10 +30,6 @@ public class NeighbourCountConditionPanel extends JPanel {
         add(targetCountPanel);
         add(comparePanel);
         add(addButton);
-    }
-
-    private class NeighbourCountCondition{
-
     }
 
     private class TargetCountPanel extends JPanel{

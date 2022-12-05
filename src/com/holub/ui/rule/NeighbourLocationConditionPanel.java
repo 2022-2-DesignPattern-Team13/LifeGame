@@ -1,5 +1,7 @@
 package com.holub.ui.rule;
 
+import com.holub.rule.NeighborLocationCondition;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +13,7 @@ public class NeighbourLocationConditionPanel extends JPanel {
     private IsAlivePanel isAlivePanel;
     private JButton addButton;
 
-    public NeighbourLocationConditionPanel(JPanel resultPanel) {
+    public NeighbourLocationConditionPanel(ConditionResultPanel resultPanel) {
         label = new JLabel("Neighbour location condition");
         locationPanel = new LocationPanel();
         isAlivePanel = new IsAlivePanel();
@@ -20,9 +22,7 @@ public class NeighbourLocationConditionPanel extends JPanel {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                resultPanel.add(new JTextField(locationPanel.getSelected()+" "+isAlivePanel.getSelected()));
-                resultPanel.revalidate();
-                resultPanel.repaint();
+                resultPanel.addResult(new NeighborLocationCondition(locationPanel.getSelected(), isAlivePanel.getSelected()));
             }
         });
 

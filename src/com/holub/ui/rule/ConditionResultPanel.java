@@ -83,15 +83,16 @@ public class ConditionResultPanel extends JPanel {
 
                     while(!stack.empty()){
                         Object top = stack.pop();
+                        if(top.toString().compareTo("(") == 0)
+                            break;
+
                         if(top instanceof LogicalOperation){
                             if(midResult.hasOperation())
                                 throw new Exception();
 
-                            midResult.setOperation((LogicalOperation) stack.peek());
+                            midResult.setOperation((LogicalOperation) top);
                         }else if(top instanceof ConditionComponent){
-                            midResult.addCondition((ConditionComponent) stack.peek());
-                        }else if(top.toString().compareTo("(") == 0){
-                            break;
+                            midResult.addCondition((ConditionComponent) top);
                         }
                     }
 
@@ -102,7 +103,6 @@ public class ConditionResultPanel extends JPanel {
             }
 
             while(!stack.empty()){
-                System.out.println(stack.peek().toString());
                 if(stack.peek() instanceof LogicalOperation){
                     if(result.hasOperation())
                         return null;
@@ -117,6 +117,7 @@ public class ConditionResultPanel extends JPanel {
                 return result;
             return null;
         }catch(Exception e){
+            e.printStackTrace();
             return null;
         }
     }

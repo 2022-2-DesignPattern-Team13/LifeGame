@@ -32,8 +32,6 @@ public class LogicalOperationEditorPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 resultPanel.addResult(logicalOperationJComboBox.getSelectedItem());
-                resultPanel.revalidate();
-                resultPanel.repaint();
             }
         });
         add(addButton);
