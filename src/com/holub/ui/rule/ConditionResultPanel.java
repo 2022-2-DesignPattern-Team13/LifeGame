@@ -76,6 +76,7 @@ public class ConditionResultPanel extends JPanel {
 
             // 3. 괄호가 포함된 inorder expression -> tree
             for(Object o : conditionResult){
+                System.out.println(o.toString());
                 if(o.toString().compareTo("(") == 0){
                     stack.push(o);
                 }else if(o.toString().compareTo(")") == 0){
@@ -103,18 +104,21 @@ public class ConditionResultPanel extends JPanel {
             }
 
             while(!stack.empty()){
-                if(stack.peek() instanceof LogicalOperation){
+                Object top = stack.peek();
+                if(top instanceof LogicalOperation){
                     if(result.hasOperation())
                         return null;
-                    result.setOperation((LogicalOperation) stack.peek());
-                }else if(stack.peek() instanceof ConditionComponent){
-                    result.addCondition((ConditionComponent) stack.peek());
+                    result.setOperation((LogicalOperation) top);
+                }else if(top instanceof ConditionComponent){
+                    result.addCondition((ConditionComponent) top);
                 }
                 stack.pop();
             }
 
-            if(result.checkIsValid())
+            if(result.checkIsValid()){
                 return result;
+            }
+
             return null;
         }catch(Exception e){
             e.printStackTrace();

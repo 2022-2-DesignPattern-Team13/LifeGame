@@ -20,7 +20,7 @@ public class Condition extends ConditionComponent {
         if(conditionComponents.size() > 2)
             return false;
 
-        if(!(operation instanceof NullLogicalOperation) && conditionComponents.size() == 1)
+        if(!(operation instanceof NullLogicalOperation || operation == null) && conditionComponents.size() == 1)
             return false;
 
         for(ConditionComponent conditionComponent : conditionComponents){
@@ -60,4 +60,13 @@ public class Condition extends ConditionComponent {
     }
 
     public boolean hasOperation(){return operation !=null;}
+
+
+    public String toString(){
+        if(conditionComponents.size() == 1){
+            return conditionComponents.get(0).toString();
+        }
+
+        return "("+conditionComponents.get(0).toString()+" "+operation.toString()+" "+conditionComponents.get(1).toString()+")";
+    }
 }
