@@ -10,4 +10,9 @@ public class CompareEqual implements Compare {
     public boolean compare(boolean a, boolean b) {
         return a==b;
     }
+
+    @Override
+    public String toString() {
+        return "equal";
+    }
 }

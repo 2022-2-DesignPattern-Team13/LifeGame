@@ -10,4 +10,9 @@ public class NullLogicalOperation implements LogicalOperation {
     public boolean operate(boolean c) {
         return c;
     }
+
+    @Override
+    public String toString() {
+        return "";
+    }
 }

@@ -7,8 +7,6 @@ import java.util.ArrayList;
 
 public class Rule extends RuleComponent {
     private ArrayList<RuleComponent> ruleComponents;
-
-
     public Rule(){
         ruleComponents = new ArrayList<>();
 

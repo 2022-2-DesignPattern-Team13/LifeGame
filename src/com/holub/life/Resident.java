@@ -145,7 +145,7 @@ public final class Resident implements Cell
 					"May not create memento of a unitary cell");
 	}
 
-	public void setRule(Rule rule){
+	public void setRule(RuleComponent rule){
 		this.rules = rule;
 	}
 }

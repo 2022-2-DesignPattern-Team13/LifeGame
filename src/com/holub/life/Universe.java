@@ -9,6 +9,7 @@ import java.awt.event.*;
 import com.holub.io.Files;
 
 import com.holub.rule.*;
+import com.holub.rule.ui.RuleFrame;
 import com.holub.ui.MenuSite;
 import com.holub.life.Compose.ComposeControl;
 import com.holub.ui.*;
@@ -300,8 +301,9 @@ public class Universe extends JPanel
 
 	private void doRule(){
 		// new Rule부분은 화면에서 받아온 rule로 교체 예정
-		Command command = new AddRuleCommand(new Rule());
-		command.execute(outermostCell);
+//		Command command = new SetRuleCommand(new Rule());
+//		command.execute(outermostCell);
+		new RuleFrame();
 	}
 
 	/** Override paint to ask the outermost Neighborhood

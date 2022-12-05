@@ -1,12 +1,10 @@
 package com.holub.rule;
 
 import com.holub.life.Cell;
-import com.holub.life.Resident;
+public class SetRuleCommand implements Command{
+    private RuleComponent rule;
 
-public class AddRuleCommand implements Command{
-    private Rule rule;
-
-    public AddRuleCommand(Rule rule){
+    public SetRuleCommand(RuleComponent rule){
         this.rule = rule;
     }
 
