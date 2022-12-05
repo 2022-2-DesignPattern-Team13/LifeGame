@@ -19,6 +19,8 @@ public class BehaviourPanel extends JPanel {
 
     private JPanel radioPanel;
 
+    private Behaviour selectedBehavior;
+
     public BehaviourPanel() {
 
         setLayout(new BorderLayout());
@@ -35,12 +37,14 @@ public class BehaviourPanel extends JPanel {
             radioButtons.add(new JRadioButton(behaviour.toString()));
         }
 
-        for (JRadioButton radioButton : radioButtons) {
+        for (int index = 0; index < radioButtons.size(); index++) {
+            JRadioButton radioButton = radioButtons.get(index);
+            setSelectedRadioButton(radioButton, index);
             radioButtonGroup.add(radioButton);
             radioPanel.add(radioButton);
         }
 
-        radioPanel.setBorder(BorderFactory.createEmptyBorder(10,100,10,100));
+        radioPanel.setBorder(BorderFactory.createEmptyBorder(10, 100, 10, 100));
 
         setBorder(new TitledBorder(
                 null,
@@ -49,5 +53,17 @@ public class BehaviourPanel extends JPanel {
                 new Font("Arial", Font.BOLD, 15)));
 
         this.add(radioPanel);
+    }
+
+    private void setSelectedRadioButton(JRadioButton radioButton, Integer index) {
+        radioButton.addActionListener(e -> {
+            if (radioButton.isSelected()) {
+                selectedBehavior = behaviours.get(index);
+            }
+        });
+    }
+
+    public Behaviour getSelectedBehavior() {
+        return selectedBehavior;
     }
 }

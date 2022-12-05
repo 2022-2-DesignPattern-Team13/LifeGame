@@ -6,8 +6,6 @@ import com.holub.rule.ConditionComponent;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class RuleFrame extends JFrame {
 
@@ -17,10 +15,9 @@ public class RuleFrame extends JFrame {
 
     private ConditionEditorPanel conditionEditorPanel;
 
-
     private ConditionComponent createdRule;
 
-    private String selectedBehavior;
+    private Behaviour selectedBehavior;
 
     public RuleFrame() {
         super("Rule");
@@ -43,17 +40,21 @@ public class RuleFrame extends JFrame {
 
         // Rule 생성 button
         JButton addRuleButton = new JButton("+ Add new rule");
-        setAddRuleBtnActionListener(addRuleButton);
+        setAddRuleButtonActionListener(addRuleButton);
 
         // 생성된 Rule List 레이아웃
         ruleListPanel = new JPanel();
         ruleListPanel.setLayout(new GridLayout(0, 1));
         ruleListPanel.setBackground(Color.white);
-        ruleListPanel.setBorder(BorderFactory.createEmptyBorder(30, 200, 30, 200));
+        ruleListPanel.setBorder(BorderFactory.createEmptyBorder(30, 100, 30, 100));
 
 
         // 최종 Rule 적용 button
         JButton applyRuleButton = new JButton("Apply Custom Rule >>");
+        setApplyBtnActionListener(applyRuleButton);
+        JPanel applyButtonPanel = new JPanel();
+        applyButtonPanel.add(applyRuleButton);
+        applyButtonPanel.setAlignmentX(CENTER_ALIGNMENT);
 
 
         JPanel conditionSettingPanel = new JPanel();
@@ -63,39 +64,42 @@ public class RuleFrame extends JFrame {
 
         // JFrame 설정
         this.setVisible(true);
-        this.setSize(800, 800);
+        this.setSize(800, 900);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
 
         this.add(conditionSettingPanel);
         this.add(ruleListPanel);
-        this.add(new JPanel().add(applyRuleButton));
+        this.add(applyButtonPanel);
     }
 
-    private void setAddRuleBtnActionListener(JButton button) {
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                createdRule = conditionEditorPanel.getCreatedComponent();
-                JLabel labelRule = new JLabel(createdRule.toString());
-                labelRule.setFont(new Font(null, Font.BOLD, 13));
+    private void setAddRuleButtonActionListener(JButton button) {
+        button.addActionListener(e -> {
+            createdRule = conditionEditorPanel.getCreatedComponent();
+            JLabel labelRule = new JLabel(createdRule.toString());
+            labelRule.setFont(new Font(null, Font.BOLD, 13));
 
-                selectedBehavior = "Die!!!!";
-                JLabel labelBehavior = new JLabel(selectedBehavior.toString());
-                labelBehavior.setFont(new Font(null, Font.BOLD, 13));
+            selectedBehavior = behaviourPanel.getSelectedBehavior();
+            JLabel labelBehavior = new JLabel(selectedBehavior.toString());
+            labelBehavior.setFont(new Font(null, Font.BOLD, 13));
 
-                JPanel ruleLabelPanel = new JPanel();
-                ruleLabelPanel.setLayout(new FlowLayout());
-                ruleLabelPanel.add(new JLabel("Rule: "));
-                ruleLabelPanel.add(labelRule);
-                ruleLabelPanel.add(new JLabel(", when cell is "));
-                ruleLabelPanel.add(labelBehavior);
+            JPanel ruleLabelPanel = new JPanel();
+            ruleLabelPanel.setLayout(new FlowLayout());
+            ruleLabelPanel.setBackground(Color.white);
+            ruleLabelPanel.add(new JLabel("Rule: "));
+            ruleLabelPanel.add(labelRule);
+            ruleLabelPanel.add(new JLabel(", when cell is "));
+            ruleLabelPanel.add(labelBehavior);
 
+            ruleListPanel.add(ruleLabelPanel);
+            revalidate();
+            repaint();
+        });
+    }
 
-                ruleListPanel.add(ruleLabelPanel);
-                revalidate();
-                repaint();
-            }
+    private void setApplyBtnActionListener(JButton button) {
+        button.addActionListener(e -> {
+            // apply 버튼 클릭
         });
     }
 
