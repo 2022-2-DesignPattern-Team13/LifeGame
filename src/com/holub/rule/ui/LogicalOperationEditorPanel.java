@@ -16,7 +16,7 @@ public class LogicalOperationEditorPanel extends JPanel {
     private JButton addButton;
 
 
-    public LogicalOperationEditorPanel(JPanel resultPanel){
+    public LogicalOperationEditorPanel(ConditionResultPanel resultPanel){
         label = new JLabel("Logical Operation");
         add(label);
 
@@ -31,11 +31,7 @@ public class LogicalOperationEditorPanel extends JPanel {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                LogicalOperation logicalOperation = (LogicalOperation) logicalOperationJComboBox.getSelectedItem();
-                JTextField result = new JTextField(logicalOperation.toString());
-                result.setEditable(false);
-                resultPanel.add(result);
+                resultPanel.addResult(logicalOperationJComboBox.getSelectedItem());
                 resultPanel.revalidate();
                 resultPanel.repaint();
             }

@@ -1,7 +1,8 @@
 package com.holub.rule.ui;
 
+import com.holub.rule.ConditionComponent;
+
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -30,13 +31,9 @@ public class ConditionEditorPanel extends JPanel {
         add(neighbourLocationConditionPanel);
 
         add(conditionResultPanel);
+    }
 
-        checkValidButton = new JButton("check validness");
-        checkValidButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
+    private boolean checkValidness(){
+        return false;
     }
 }

@@ -13,7 +13,7 @@ public class NeighbourCountConditionPanel extends JPanel {
     private ComparePanel comparePanel;
     private JButton addButton;
     private JPanel resultPanel;
-    public NeighbourCountConditionPanel(JPanel resultPanel){
+    public NeighbourCountConditionPanel(ConditionResultPanel resultPanel){
         this.resultPanel = resultPanel;
 
         label = new JLabel("Neighbor Count Conditon");
@@ -23,9 +23,7 @@ public class NeighbourCountConditionPanel extends JPanel {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                resultPanel.add(new TextField(targetCountPanel.getSelected().toString() + " " + comparePanel.getSelected().toString()));
-                resultPanel.revalidate();
-                resultPanel.repaint();
+                resultPanel.addResult(targetCountPanel.getSelected());
             }
         });
 
@@ -33,6 +31,10 @@ public class NeighbourCountConditionPanel extends JPanel {
         add(targetCountPanel);
         add(comparePanel);
         add(addButton);
+    }
+
+    private class NeighbourCountCondition{
+
     }
 
     private class TargetCountPanel extends JPanel{

@@ -16,7 +16,7 @@ public class ParenthesisPanel extends JPanel {
     private JButton addButton;
 
 
-    public ParenthesisPanel(JPanel resultPanel){
+    public ParenthesisPanel(ConditionResultPanel resultPanel){
         label = new JLabel("Parenthesis");
         add(label);
 
@@ -27,9 +27,7 @@ public class ParenthesisPanel extends JPanel {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                resultPanel.add(new JTextField((String)parenthesisComboBox.getSelectedItem()));
-                resultPanel.revalidate();
-                resultPanel.repaint();
+                resultPanel.addResult(parenthesisComboBox.getSelectedItem());
             }
         });
         add(addButton);

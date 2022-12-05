@@ -28,14 +28,18 @@ public class Condition extends ConditionComponent {
         return true;
     }
 
-    public void addCondition(ConditionComponent conditionComponent) {
+    public void addCondition(ConditionComponent conditionComponent) throws Exception{
         if(conditionComponents.size() == 2){
-            return;
+            throw new Exception("can't add more than 2 conditions in the parentheses");
         }
         conditionComponents.add(conditionComponent);
     }
 
     public void removeCondition(ConditionComponent conditionComponent){
         conditionComponents.remove(conditionComponent);
+    }
+
+    public void setOperation(LogicalOperation operation){
+        this.operation = operation;
     }
 }
