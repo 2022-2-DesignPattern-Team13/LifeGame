@@ -1,6 +1,7 @@
 package com.holub.ui.rule;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,11 +13,14 @@ public class ParenthesisPanel extends JPanel {
 
 
     public ParenthesisPanel(ConditionResultPanel resultPanel){
-        label = new JLabel("Parenthesis");
-        add(label);
+        setLayout(new BorderLayout());
+        JPanel selectPanel = new JPanel();
+
+        label = new JLabel("Parenthesis : ");
+        selectPanel.add(label);
 
         parenthesisComboBox = new JComboBox<>(parenthesisArr);
-        add(parenthesisComboBox);
+        selectPanel.add(parenthesisComboBox);
 
         addButton = new JButton("+");
         addButton.addActionListener(new ActionListener() {
@@ -25,6 +29,7 @@ public class ParenthesisPanel extends JPanel {
                 resultPanel.addResult(parenthesisComboBox.getSelectedItem());
             }
         });
-        add(addButton);
+        this.add(selectPanel, BorderLayout.WEST);
+        this.add(addButton, BorderLayout.EAST);
     }
 }

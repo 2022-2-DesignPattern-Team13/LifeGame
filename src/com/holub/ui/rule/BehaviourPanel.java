@@ -40,10 +40,13 @@ public class BehaviourPanel extends JPanel {
             radioPanel.add(radioButton);
         }
 
-        radioPanel.setBorder(BorderFactory.createEmptyBorder(10,50,10,50));
+        radioPanel.setBorder(BorderFactory.createEmptyBorder(10,100,10,100));
 
         setBorder(new TitledBorder(
-                null, "Choose Condition Behavior", TitledBorder.LEADING, TitledBorder.TOP));
+                null,
+                "Choose Condition Result State",
+                TitledBorder.LEADING, TitledBorder.TOP,
+                new Font("Arial", Font.BOLD, 15)));
 
         this.add(radioPanel);
     }

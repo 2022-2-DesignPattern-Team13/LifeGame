@@ -13,28 +13,32 @@ public class ConditionEditorPanel extends JPanel {
     private JButton checkValidButton;
 
     public ConditionEditorPanel(){
-        setLayout(new GridLayout(0,1,-1,-1));
-        setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+
+        JPanel conditionGridPanel = new JPanel();
+        conditionGridPanel.setLayout(new GridLayout(0,1,-1,-1));
+        conditionGridPanel.setBorder(BorderFactory.createEmptyBorder(10,10,20,10));
 
         conditionResultPanel = new ConditionResultPanel();
 
         logicalOperationEditorPanel = new LogicalOperationEditorPanel(conditionResultPanel);
         logicalOperationEditorPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-        add(logicalOperationEditorPanel);
+        conditionGridPanel.add(logicalOperationEditorPanel);
 
         parenthesisPanel = new ParenthesisPanel(conditionResultPanel);
         parenthesisPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-        add(parenthesisPanel);
+        conditionGridPanel.add(parenthesisPanel);
 
         neighborCountConditionPanel = new NeighbourCountConditionPanel(conditionResultPanel);
         neighborCountConditionPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-        add(neighborCountConditionPanel);
+        conditionGridPanel.add(neighborCountConditionPanel);
 
         neighbourLocationConditionPanel = new NeighbourLocationConditionPanel(conditionResultPanel);
         neighbourLocationConditionPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-        add(neighbourLocationConditionPanel);
+        conditionGridPanel.add(neighbourLocationConditionPanel);
 
-        add(conditionResultPanel);
+        this.setLayout(new BorderLayout());
+        this.add(conditionResultPanel, BorderLayout.SOUTH);
+        this.add(conditionGridPanel, BorderLayout.CENTER);
     }
 
     private boolean checkValidness(){

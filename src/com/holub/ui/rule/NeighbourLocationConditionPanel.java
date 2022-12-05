@@ -3,6 +3,7 @@ package com.holub.ui.rule;
 import com.holub.rule.NeighborLocationCondition;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,7 +15,13 @@ public class NeighbourLocationConditionPanel extends JPanel {
     private JButton addButton;
 
     public NeighbourLocationConditionPanel(ConditionResultPanel resultPanel) {
-        label = new JLabel("Neighbour location condition");
+        setLayout(new BorderLayout());
+
+        JPanel selectPanel = new JPanel();
+        label = new JLabel("Neighbour Location condition");
+        label.setFont(new Font(null, Font.BOLD, 13));
+        selectPanel.add(label);
+
         locationPanel = new LocationPanel();
         isAlivePanel = new IsAlivePanel();
 
@@ -26,10 +33,11 @@ public class NeighbourLocationConditionPanel extends JPanel {
             }
         });
 
-        add(label);
-        add(locationPanel);
-        add(isAlivePanel);
-        add(addButton);
+        selectPanel.add(locationPanel);
+        selectPanel.add(isAlivePanel);
+
+        this.add(selectPanel, BorderLayout.WEST);
+        this.add(addButton, BorderLayout.EAST);
     }
 
     private class LocationPanel extends JPanel{
@@ -37,7 +45,7 @@ public class NeighbourLocationConditionPanel extends JPanel {
         private JComboBox<String> selectLocationComboBox;
 
         public LocationPanel(){
-            label = new JLabel("location");
+            label = new JLabel("location :");
             add(label);
             selectLocationComboBox = new JComboBox<>(new String[] {
                     "north",
@@ -63,7 +71,7 @@ public class NeighbourLocationConditionPanel extends JPanel {
         private JCheckBox isAliveCheckBox;
 
         public IsAlivePanel(){
-            label = new JLabel("Is alive");
+            label = new JLabel("Is alive :");
             add(label);
 
             isAliveCheckBox = new JCheckBox();

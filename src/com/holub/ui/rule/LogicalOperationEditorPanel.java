@@ -5,6 +5,7 @@ import com.holub.rule.LogicalOperation;
 import com.holub.rule.LogicalOr;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -17,15 +18,18 @@ public class LogicalOperationEditorPanel extends JPanel {
 
 
     public LogicalOperationEditorPanel(ConditionResultPanel resultPanel){
-        label = new JLabel("Logical Operation");
-        add(label);
+        setLayout(new BorderLayout());
+
+        JPanel selectPanel = new JPanel();
+        label = new JLabel("Logical Operation : ");
+        selectPanel.add(label);
 
         logicalOperations = new ArrayList<>();
         logicalOperations.add(new LogicalAnd());
         logicalOperations.add(new LogicalOr());
 
         logicalOperationJComboBox = new JComboBox(logicalOperations.toArray());
-        add(logicalOperationJComboBox);
+        selectPanel.add(logicalOperationJComboBox);
 
         addButton = new JButton("+");
         addButton.addActionListener(new ActionListener() {
@@ -34,7 +38,7 @@ public class LogicalOperationEditorPanel extends JPanel {
                 resultPanel.addResult(logicalOperationJComboBox.getSelectedItem());
             }
         });
-        add(addButton);
-
+        this.add(selectPanel, BorderLayout.WEST);
+        this.add(addButton, BorderLayout.EAST);
     }
 }
