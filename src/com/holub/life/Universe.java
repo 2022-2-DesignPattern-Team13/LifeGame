@@ -9,7 +9,7 @@ import java.awt.event.*;
 import com.holub.io.Files;
 
 import com.holub.rule.*;
-import com.holub.rule.ui.RuleFrame;
+import com.holub.ui.rule.RuleFrame;
 import com.holub.ui.MenuSite;
 import com.holub.life.Compose.ComposeControl;
 import com.holub.ui.*;

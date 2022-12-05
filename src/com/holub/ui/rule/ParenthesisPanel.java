@@ -1,13 +1,8 @@
-package com.holub.rule.ui;
-
-import com.holub.rule.LogicalAnd;
-import com.holub.rule.LogicalOperation;
-import com.holub.rule.LogicalOr;
+package com.holub.ui.rule;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class ParenthesisPanel extends JPanel {
     private JLabel label;

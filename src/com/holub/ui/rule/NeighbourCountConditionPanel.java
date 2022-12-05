@@ -1,9 +1,8 @@
-package com.holub.rule.ui;
+package com.holub.ui.rule;
 
 import com.holub.rule.*;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 

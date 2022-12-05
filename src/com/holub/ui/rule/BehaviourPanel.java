@@ -1,4 +1,4 @@
-package com.holub.rule.ui;
+package com.holub.ui.rule;
 
 import javax.swing.*;
 import java.awt.*;

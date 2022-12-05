@@ -1,10 +1,6 @@
-package com.holub.rule.ui;
-
-import com.holub.rule.ConditionComponent;
+package com.holub.ui.rule;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class ConditionEditorPanel extends JPanel {
     private LogicalOperationEditorPanel logicalOperationEditorPanel;
