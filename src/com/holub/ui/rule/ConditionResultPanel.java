@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Stack;
 
 public class ConditionResultPanel extends JPanel {
@@ -14,6 +15,10 @@ public class ConditionResultPanel extends JPanel {
     private JButton checkValidnessButton;
     private JTextField validnessResult;
     private ConditionComponent createdCondition;
+
+    private JButton clearButton;
+    private HashMap<Object, JTextField> conditionResultMap;
+
     public ConditionResultPanel(){
         conditionResult = new ArrayList<>();
 
@@ -22,6 +27,8 @@ public class ConditionResultPanel extends JPanel {
 
         checkValidnessButton = new JButton("check");
         validnessResult = new JTextField();
+        clearButton = new JButton("clear");
+        conditionResultMap = new HashMap<>();
 
         checkValidnessButton.addActionListener(new ActionListener() {
             @Override
@@ -37,8 +44,18 @@ public class ConditionResultPanel extends JPanel {
                 repaint();
             }
         });
+
+        clearButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for(Object o : conditionResultMap.keySet()){
+                    removeResult(o);
+                }
+            }
+        });
         add(checkValidnessButton);
         add(validnessResult);
+        add(clearButton);
     }
 
     public ConditionComponent getCreatedCondition() {
@@ -47,7 +64,19 @@ public class ConditionResultPanel extends JPanel {
 
     public void addResult(Object o){
         conditionResult.add(o);
-        add(new JTextField(o.toString()));
+
+        JTextField newCondition = new JTextField(o.toString());
+
+        conditionResultMap.put(o, newCondition);
+        add(newCondition);
+
+        revalidate();
+        repaint();
+    }
+
+    public void removeResult(Object o){
+        conditionResult.remove(o);
+        remove(conditionResultMap.get(o));
 
         revalidate();
         repaint();

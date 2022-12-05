@@ -9,10 +9,10 @@ import java.awt.event.*;
 import com.holub.io.Files;
 
 import com.holub.rule.*;
-import com.holub.ui.rule.RuleFrame;
 import com.holub.ui.MenuSite;
 import com.holub.life.Compose.ComposeControl;
 import com.holub.ui.*;
+import com.holub.ui.rule.RuleFrame;
 
 /**
  * The Universe is a mediator that sits between the Swing
@@ -308,7 +308,7 @@ public class Universe extends JPanel
 		// new Rule부분은 화면에서 받아온 rule로 교체 예정
 //		Command command = new SetRuleCommand(new Rule());
 //		command.execute(outermostCell);
-		new RuleFrame();
+		new RuleFrame(outermostCell);
 	}
 
 	/** Override paint to ask the outermost Neighborhood

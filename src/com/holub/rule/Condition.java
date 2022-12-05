@@ -1,9 +1,6 @@
 package com.holub.rule;
 
 import com.holub.life.Cell;
-import com.holub.rule.ConditionComponent;
-import com.holub.rule.LogicalOperation;
-
 import java.util.ArrayList;
 
 public class Condition extends ConditionComponent {
@@ -66,7 +63,6 @@ public class Condition extends ConditionComponent {
         if(conditionComponents.size() == 1){
             return conditionComponents.get(0).toString();
         }
-
         return "("+conditionComponents.get(0).toString()+" "+operation.toString()+" "+conditionComponents.get(1).toString()+")";
     }
 }
