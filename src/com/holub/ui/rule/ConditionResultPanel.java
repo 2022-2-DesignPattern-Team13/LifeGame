@@ -68,54 +68,57 @@ public class ConditionResultPanel extends JPanel {
      */
     public ConditionComponent makeConditionComponent(){
         try{
-            ConditionComponent result = new Condition(new NullLogicalOperation());
+            // 1. root 노드 생성
+            ConditionComponent result = new Condition(null);
 
+            // 2. Stack 생성
             Stack<Object> stack = new Stack<>();
+
+            // 3. 괄호가 포함된 inorder expression -> tree
             for(Object o : conditionResult){
                 if(o.toString().compareTo("(") == 0){
                     stack.push(o);
                 }else if(o.toString().compareTo(")") == 0){
-                    ConditionComponent midResult = new Condition(new NullLogicalOperation());
+                    ConditionComponent midResult = new Condition(null);
 
-                    while(!stack.empty() || stack.peek().toString().compareTo("(") == 0){
-                        if(stack.peek() instanceof LogicalOperation){
+                    while(!stack.empty()){
+                        Object top = stack.pop();
+                        if(top instanceof LogicalOperation){
+                            if(midResult.hasOperation())
+                                throw new Exception();
+
                             midResult.setOperation((LogicalOperation) stack.peek());
-                        }else if(stack.peek() instanceof ConditionComponent){
+                        }else if(top instanceof ConditionComponent){
                             midResult.addCondition((ConditionComponent) stack.peek());
+                        }else if(top.toString().compareTo("(") == 0){
+                            break;
                         }
-                        stack.pop();
                     }
+
+                    stack.push(midResult);
+                }else{
+                    stack.push(o);
                 }
             }
 
-            return result;
+            while(!stack.empty()){
+                System.out.println(stack.peek().toString());
+                if(stack.peek() instanceof LogicalOperation){
+                    if(result.hasOperation())
+                        return null;
+                    result.setOperation((LogicalOperation) stack.peek());
+                }else if(stack.peek() instanceof ConditionComponent){
+                    result.addCondition((ConditionComponent) stack.peek());
+                }
+                stack.pop();
+            }
+
+            if(result.checkIsValid())
+                return result;
+            return null;
         }catch(Exception e){
             return null;
         }
-
-
-//        try{
-//            ConditionComponent conditionComponent = new Condition(new NullLogicalOperation());
-//
-//            for(int i=index; i<conditionResult.size(); i++){
-//                if(conditionResult.get(i).toString().compareTo("(") == 0){
-//                    ConditionComponent left = makeConditionComponent(i+1);
-//                }else if(conditionResult.get(i).toString().compareTo(")") == 0){
-//                    return conditionComponent;
-//                }else if(conditionResult.get(i) instanceof ConditionComponent){
-//                    conditionComponent.addCondition((ConditionComponent) conditionResult.get(i));
-//                }else if(conditionResult.get(i) instanceof LogicalOperation){
-//                    conditionComponent.setOperation((LogicalOperation) conditionResult.get(i));
-//                }else{
-//                    throw new Exception();
-//                }
-//            }
-//
-//            return conditionComponent;
-//
-//        }catch(Exception e){
-//            return null;
-//        }
     }
 
     public boolean checkValidness(){

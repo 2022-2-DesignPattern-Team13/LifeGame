@@ -14,6 +14,17 @@ public class Condition extends ConditionComponent {
         this.operation = logicalOperation;
     }
 
+    public boolean checkIsValid(){
+        if((operation == null && conditionComponents.size() == 2) || (conditionComponents.size()>2))
+            return false;
+
+        for(ConditionComponent conditionComponent : conditionComponents){
+            if(!conditionComponent.checkIsValid())
+                return false;
+        }
+        return true;
+    }
+
     public boolean check(Cell cell, Cell north, Cell south, Cell east, Cell west, Cell northeast, Cell northwest, Cell southeast, Cell southwest){
         if(conditionComponents.size()==2){
             return operation.operate(
@@ -42,4 +53,6 @@ public class Condition extends ConditionComponent {
     public void setOperation(LogicalOperation operation){
         this.operation = operation;
     }
+
+    public boolean hasOperation(){return operation !=null;}
 }

@@ -19,4 +19,12 @@ public class ConditionComponent {
 
     public void setOperation(LogicalOperation logicalOperation){}
 
+    public boolean checkIsValid(){
+        return false;
+    }
+
+    public boolean hasOperation(){
+        return false;
+    }
+
 }
