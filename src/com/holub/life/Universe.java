@@ -9,6 +9,7 @@ import java.awt.event.*;
 import com.holub.io.Files;
 
 import com.holub.rule.*;
+
 import com.holub.ui.MenuSite;
 import com.holub.life.Compose.ComposeControl;
 import com.holub.ui.*;
@@ -175,16 +176,6 @@ public class Universe extends JPanel
                         }
                 );
 
-		MenuSite.addLine
-        (this, "Custom", "Color",
-				new ActionListener()
-                {
-					public void actionPerformed(ActionEvent e) {
-                        doColor();
-					}
-				}
-		);
-
 		MenuSite.addLine(
 				this, "Custom", "Rule",
 				new ActionListener() {
@@ -296,12 +287,6 @@ public class Universe extends JPanel
                     "The Game of Life", JOptionPane.ERROR_MESSAGE);
         }
         repaint();
-    }
-
-	private void doColor()
-	{
-        Color color = ColorChooser.userColorSelected();
-        Clock.instance().stop();
     }
 
 	private void doRule(){
