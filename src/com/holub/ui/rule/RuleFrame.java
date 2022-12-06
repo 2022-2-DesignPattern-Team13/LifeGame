@@ -19,14 +19,14 @@ public class RuleFrame extends JFrame {
 
     private Behaviour selectedBehavior;
 
-    private RuleComponent ruleComponent;
+    private Rule rules;
     private Cell outermostCell;
 
     public RuleFrame(Cell outermostCell) {
         super("Rule");
 
         // ruleComponent new
-        ruleComponent = new Rule();
+        rules = new Rule();
 
         this.outermostCell = outermostCell;
 
@@ -94,7 +94,7 @@ public class RuleFrame extends JFrame {
             JLabel labelBehavior = new JLabel(selectedBehavior.toString());
             labelBehavior.setFont(new Font(null, Font.BOLD, 13));
 
-            ruleComponent.addRule(new RuleItem(createdCondtion, selectedBehavior));
+            rules.addRule(new RuleItem(createdCondtion, selectedBehavior));
 
 
             JPanel ruleLabelPanel = new JPanel();
@@ -114,7 +114,7 @@ public class RuleFrame extends JFrame {
     private void setApplyBtnActionListener(JButton button) {
         button.addActionListener(e -> {
             // apply 버튼 클릭
-            outermostCell.setRule(ruleComponent);
+            outermostCell.setRule(rules);
         });
     }
 

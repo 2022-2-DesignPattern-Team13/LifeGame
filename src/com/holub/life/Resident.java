@@ -3,7 +3,6 @@ package com.holub.life;
 import java.awt.*;
 
 import com.holub.rule.Rule;
-import com.holub.rule.RuleComponent;
 import com.holub.ui.Colors;	// Contains constants specifying various
 							// colors not defined in java.awt.Color.
 
@@ -17,7 +16,7 @@ import com.holub.ui.Colors;	// Contains constants specifying various
 
 public final class Resident implements Cell
 {
-	private RuleComponent rules;
+	private Rule rules;
 
 	private static final Color BORDER_COLOR = Colors.DARK_YELLOW;
 	private static final Color LIVE_COLOR 	= Color.RED;
@@ -26,7 +25,7 @@ public final class Resident implements Cell
 	private boolean amAlive 	= false;
 	private boolean willBeAlive	= false;
 
-	public Resident(RuleComponent rules){
+	public Resident(Rule rules){
 		this.rules = rules;
 	}
 
@@ -145,7 +144,7 @@ public final class Resident implements Cell
 					"May not create memento of a unitary cell");
 	}
 
-	public void setRule(RuleComponent rule){
+	public void setRule(Rule rule){
 		this.rules = rule;
 	}
 

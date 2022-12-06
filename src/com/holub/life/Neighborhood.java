@@ -5,7 +5,6 @@ import java.util.*;
 import java.io.*;
 
 import com.holub.rule.Rule;
-import com.holub.rule.RuleComponent;
 import com.holub.ui.Colors;
 import com.holub.asynch.ConditionVariable;
 
@@ -435,7 +434,7 @@ public final class Neighborhood implements Cell
 	}
 
 	@Override
-	public void setRule(RuleComponent rule) {
+	public void setRule(Rule rule) {
 		for(int i=0; i<gridSize; i++){
 			for(int j=0; j<gridSize; j++){
 				grid[i][j].setRule(rule);
