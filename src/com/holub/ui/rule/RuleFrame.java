@@ -8,8 +8,6 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.HashMap;
 
 public class RuleFrame extends JFrame {
@@ -82,9 +80,12 @@ public class RuleFrame extends JFrame {
 
         // JFrame 설정
         this.setVisible(true);
-        this.setSize(900, 900);
+        this.setSize(1100, 900);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
+        Dimension frameSize = this.getSize(); // 프레임 사이즈
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // 모니터 사이즈
+        this.setLocation((screenSize.width - frameSize.width)/2, (screenSize.height - frameSize.height)/2); // 화면 중앙 위치
 
         this.add(conditionSettingPanel);
         this.add(addButtonPanel);
@@ -98,6 +99,9 @@ public class RuleFrame extends JFrame {
             createdCondtion = conditionEditorPanel.getCreatedComponent();
             if(createdCondtion == null)
                 return;
+
+            JButton upButton = new JButton("↑");
+            JButton downButton = new JButton("↓");
 
             JLabel labelRule = new JLabel(createdCondtion.toString());
             labelRule.setFont(new Font(null, Font.BOLD, 13));
@@ -113,6 +117,8 @@ public class RuleFrame extends JFrame {
             JPanel ruleLabelPanel = new JPanel();
             ruleLabelPanel.setLayout(new FlowLayout());
             ruleLabelPanel.setBackground(Color.white);
+            ruleLabelPanel.add(downButton);
+            ruleLabelPanel.add(upButton);
             ruleLabelPanel.add(new JLabel("Rule: "));
             ruleLabelPanel.add(labelBehavior);
             ruleLabelPanel.add(new JLabel(", when cell is "));

@@ -74,10 +74,14 @@ public class ConditionResultPanel extends JPanel {
             }
         });
 
+        JLabel deleteInfo = new JLabel("(You can remove the condition by click the condition)");
+        deleteInfo.setFont(new Font("Arial", Font.PLAIN, 11));
+        deleteInfo.setHorizontalAlignment(SwingConstants.CENTER);
 
         this.add(label);
         this.add(conditionResultPanel);
         this.add(validPanel);
+        this.add(deleteInfo);
         this.add(clearButton);
     }
 
