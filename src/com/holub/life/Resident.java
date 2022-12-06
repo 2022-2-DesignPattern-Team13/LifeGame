@@ -148,4 +148,5 @@ public final class Resident implements Cell
 	public void setRule(RuleComponent rule){
 		this.rules = rule;
 	}
+
 }

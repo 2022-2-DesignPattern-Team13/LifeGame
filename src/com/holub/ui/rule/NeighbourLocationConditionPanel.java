@@ -1,6 +1,9 @@
-package com.holub.rule.ui;
+package com.holub.ui.rule;
+
+import com.holub.rule.NeighborLocationCondition;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,8 +14,14 @@ public class NeighbourLocationConditionPanel extends JPanel {
     private IsAlivePanel isAlivePanel;
     private JButton addButton;
 
-    public NeighbourLocationConditionPanel(JPanel resultPanel) {
-        label = new JLabel("Neighbour location condition");
+    public NeighbourLocationConditionPanel(ConditionResultPanel resultPanel) {
+        setLayout(new BorderLayout());
+
+        JPanel selectPanel = new JPanel();
+        label = new JLabel("Neighbour Location condition");
+        label.setFont(new Font(null, Font.BOLD, 13));
+        selectPanel.add(label);
+
         locationPanel = new LocationPanel();
         isAlivePanel = new IsAlivePanel();
 
@@ -20,16 +29,15 @@ public class NeighbourLocationConditionPanel extends JPanel {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                resultPanel.add(new JTextField(locationPanel.getSelected()+" "+isAlivePanel.getSelected()));
-                resultPanel.revalidate();
-                resultPanel.repaint();
+                resultPanel.addResult(new NeighborLocationCondition(locationPanel.getSelected(), isAlivePanel.getSelected()));
             }
         });
 
-        add(label);
-        add(locationPanel);
-        add(isAlivePanel);
-        add(addButton);
+        selectPanel.add(locationPanel);
+        selectPanel.add(isAlivePanel);
+
+        this.add(selectPanel, BorderLayout.WEST);
+        this.add(addButton, BorderLayout.EAST);
     }
 
     private class LocationPanel extends JPanel{
@@ -37,7 +45,7 @@ public class NeighbourLocationConditionPanel extends JPanel {
         private JComboBox<String> selectLocationComboBox;
 
         public LocationPanel(){
-            label = new JLabel("location");
+            label = new JLabel("location :");
             add(label);
             selectLocationComboBox = new JComboBox<>(new String[] {
                     "north",
@@ -63,7 +71,7 @@ public class NeighbourLocationConditionPanel extends JPanel {
         private JCheckBox isAliveCheckBox;
 
         public IsAlivePanel(){
-            label = new JLabel("Is alive");
+            label = new JLabel("Is alive :");
             add(label);
 
             isAliveCheckBox = new JCheckBox();

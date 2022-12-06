@@ -1,10 +1,11 @@
-package com.holub.rule.ui;
+package com.holub.ui.rule;
 
 import com.holub.rule.LogicalAnd;
 import com.holub.rule.LogicalOperation;
 import com.holub.rule.LogicalOr;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -16,31 +17,28 @@ public class LogicalOperationEditorPanel extends JPanel {
     private JButton addButton;
 
 
-    public LogicalOperationEditorPanel(JPanel resultPanel){
-        label = new JLabel("Logical Operation");
-        add(label);
+    public LogicalOperationEditorPanel(ConditionResultPanel resultPanel){
+        setLayout(new BorderLayout());
+
+        JPanel selectPanel = new JPanel();
+        label = new JLabel("Logical Operation : ");
+        selectPanel.add(label);
 
         logicalOperations = new ArrayList<>();
         logicalOperations.add(new LogicalAnd());
         logicalOperations.add(new LogicalOr());
 
         logicalOperationJComboBox = new JComboBox(logicalOperations.toArray());
-        add(logicalOperationJComboBox);
+        selectPanel.add(logicalOperationJComboBox);
 
         addButton = new JButton("+");
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                LogicalOperation logicalOperation = (LogicalOperation) logicalOperationJComboBox.getSelectedItem();
-                JTextField result = new JTextField(logicalOperation.toString());
-                result.setEditable(false);
-                resultPanel.add(result);
-                resultPanel.revalidate();
-                resultPanel.repaint();
+                resultPanel.addResult(logicalOperationJComboBox.getSelectedItem());
             }
         });
-        add(addButton);
-
+        this.add(selectPanel, BorderLayout.WEST);
+        this.add(addButton, BorderLayout.EAST);
     }
 }

@@ -1,4 +1,4 @@
-package com.holub.rule.ui;
+package com.holub.ui.rule;
 
 import com.holub.rule.*;
 
@@ -13,26 +13,31 @@ public class NeighbourCountConditionPanel extends JPanel {
     private ComparePanel comparePanel;
     private JButton addButton;
     private JPanel resultPanel;
-    public NeighbourCountConditionPanel(JPanel resultPanel){
+    public NeighbourCountConditionPanel(ConditionResultPanel resultPanel){
         this.resultPanel = resultPanel;
 
-        label = new JLabel("Neighbor Count Conditon");
+        setLayout(new BorderLayout());
+
+        JPanel selectPanel = new JPanel();
+        label = new JLabel("Neighbour Count condition");
+        label.setFont(new Font(null, Font.BOLD, 13));
+        selectPanel.add(label);
+
         targetCountPanel = new TargetCountPanel();
         comparePanel = new ComparePanel();
         addButton = new JButton("+");
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                resultPanel.add(new TextField(targetCountPanel.getSelected().toString() + " " + comparePanel.getSelected().toString()));
-                resultPanel.revalidate();
-                resultPanel.repaint();
+                resultPanel.addResult(new NeighborCountCondition(targetCountPanel.getSelected(), comparePanel.getSelected()));
             }
         });
 
-        add(label);
-        add(targetCountPanel);
-        add(comparePanel);
-        add(addButton);
+        selectPanel.add(targetCountPanel);
+        selectPanel.add(comparePanel);
+
+        this.add(selectPanel, BorderLayout.WEST);
+        this.add(addButton, BorderLayout.EAST);
     }
 
     private class TargetCountPanel extends JPanel{

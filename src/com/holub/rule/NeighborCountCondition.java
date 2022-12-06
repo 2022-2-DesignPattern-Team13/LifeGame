@@ -12,7 +12,7 @@ public class NeighborCountCondition extends ConditionItem {
     }
 
     public String toString(){
-        return "Neighbor count condition";
+        return "Neighbor count "+targetNeighborCount+" "+compare.toString();
     }
 
     @Override

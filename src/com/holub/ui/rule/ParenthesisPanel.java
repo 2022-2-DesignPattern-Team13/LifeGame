@@ -1,13 +1,9 @@
-package com.holub.rule.ui;
-
-import com.holub.rule.LogicalAnd;
-import com.holub.rule.LogicalOperation;
-import com.holub.rule.LogicalOr;
+package com.holub.ui.rule;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class ParenthesisPanel extends JPanel {
     private JLabel label;
@@ -16,22 +12,24 @@ public class ParenthesisPanel extends JPanel {
     private JButton addButton;
 
 
-    public ParenthesisPanel(JPanel resultPanel){
-        label = new JLabel("Parenthesis");
-        add(label);
+    public ParenthesisPanel(ConditionResultPanel resultPanel){
+        setLayout(new BorderLayout());
+        JPanel selectPanel = new JPanel();
+
+        label = new JLabel("Parenthesis : ");
+        selectPanel.add(label);
 
         parenthesisComboBox = new JComboBox<>(parenthesisArr);
-        add(parenthesisComboBox);
+        selectPanel.add(parenthesisComboBox);
 
         addButton = new JButton("+");
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                resultPanel.add(new JTextField((String)parenthesisComboBox.getSelectedItem()));
-                resultPanel.revalidate();
-                resultPanel.repaint();
+                resultPanel.addResult(parenthesisComboBox.getSelectedItem());
             }
         });
-        add(addButton);
+        this.add(selectPanel, BorderLayout.WEST);
+        this.add(addButton, BorderLayout.EAST);
     }
 }

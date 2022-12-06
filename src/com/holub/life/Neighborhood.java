@@ -477,6 +477,7 @@ public final class Neighborhood implements Cell
 		return m;
 	}
 
+
 	/**
 	 * The NeighborhoodState stores the state of this neighborhood
 	 * and all its sub-neighborhoods. For the moment, I'm storing

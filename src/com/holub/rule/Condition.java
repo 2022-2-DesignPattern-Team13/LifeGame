@@ -1,9 +1,6 @@
 package com.holub.rule;
 
 import com.holub.life.Cell;
-import com.holub.rule.ConditionComponent;
-import com.holub.rule.LogicalOperation;
-
 import java.util.ArrayList;
 
 public class Condition extends ConditionComponent {
@@ -12,6 +9,22 @@ public class Condition extends ConditionComponent {
     public Condition(LogicalOperation logicalOperation){
         conditionComponents = new ArrayList<>();
         this.operation = logicalOperation;
+    }
+
+    public boolean checkIsValid(){
+        if(operation == null && conditionComponents.size() == 2)
+            return false;
+        if(conditionComponents.size() > 2)
+            return false;
+
+        if(!(operation instanceof NullLogicalOperation || operation == null) && conditionComponents.size() == 1)
+            return false;
+
+        for(ConditionComponent conditionComponent : conditionComponents){
+            if(!conditionComponent.checkIsValid())
+                return false;
+        }
+        return true;
     }
 
     public boolean check(Cell cell, Cell north, Cell south, Cell east, Cell west, Cell northeast, Cell northwest, Cell southeast, Cell southwest){
@@ -28,14 +41,28 @@ public class Condition extends ConditionComponent {
         return true;
     }
 
-    public void addCondition(ConditionComponent conditionComponent) {
+    public void addCondition(ConditionComponent conditionComponent) throws Exception{
         if(conditionComponents.size() == 2){
-            return;
+            throw new Exception("can't add more than 2 conditions in the parentheses");
         }
         conditionComponents.add(conditionComponent);
     }
 
     public void removeCondition(ConditionComponent conditionComponent){
         conditionComponents.remove(conditionComponent);
+    }
+
+    public void setOperation(LogicalOperation operation){
+        this.operation = operation;
+    }
+
+    public boolean hasOperation(){return operation !=null;}
+
+
+    public String toString(){
+        if(conditionComponents.size() == 1){
+            return conditionComponents.get(0).toString();
+        }
+        return "("+conditionComponents.get(0).toString()+" "+operation.toString()+" "+conditionComponents.get(1).toString()+")";
     }
 }

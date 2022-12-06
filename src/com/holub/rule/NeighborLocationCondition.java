@@ -12,7 +12,7 @@ public class NeighborLocationCondition extends ConditionItem {
     }
 
     public String toString(){
-        return "Neighbor location condition";
+        return "Neighbor location "+location+" "+isLocationAlive;
     }
 
     @Override

@@ -9,10 +9,11 @@ import java.awt.event.*;
 import com.holub.io.Files;
 
 import com.holub.rule.*;
-import com.holub.ui.rule.RuleFrame;
+
 import com.holub.ui.MenuSite;
 import com.holub.life.Compose.ComposeControl;
 import com.holub.ui.*;
+import com.holub.ui.rule.RuleFrame;
 
 /**
  * The Universe is a mediator that sits between the Swing
@@ -51,19 +52,24 @@ public class Universe extends JPanel
 		// in the current implementation causes the program to fail
 		// miserably if the overall size of the grid is too big to fit
 		// on the screen.
-
 		Rule defaultRules = new Rule();
+		try {
 
-		// default rule: (주변에 3개가 살아있거나) (주변 2개가 살아있고 나도 살아있으면) 다음 턴에 살아있음
-		ConditionComponent conditions = new Condition(new LogicalOr());
-		conditions.addCondition(new NeighborCountCondition(3, new CompareEqual()));
 
-		ConditionComponent conditions2 = new Condition(new LogicalAnd());
-		conditions2.addCondition(new AliveCondition(true, new CompareEqual()));
-		conditions2.addCondition(new NeighborCountCondition(2, new CompareEqual()));
+			// default rule: (주변에 3개가 살아있거나) (주변 2개가 살아있고 나도 살아있으면) 다음 턴에 살아있음
+			ConditionComponent conditions = new Condition(new LogicalOr());
+			conditions.addCondition(new NeighborCountCondition(3, new CompareEqual()));
 
-		conditions.addCondition(conditions2);
-		defaultRules.addRule(new RuleItem(conditions, new AliveBehaviour()));
+			ConditionComponent conditions2 = new Condition(new LogicalAnd());
+			conditions2.addCondition(new AliveCondition(true, new CompareEqual()));
+			conditions2.addCondition(new NeighborCountCondition(2, new CompareEqual()));
+
+			conditions.addCondition(conditions2);
+			defaultRules.addRule(new RuleItem(conditions, new AliveBehaviour()));
+		}catch (Exception e){
+
+		}
+
 
 
 //		ConditionComponent conditions = new Condition(new LogicalAnd());
@@ -287,7 +293,7 @@ public class Universe extends JPanel
 		// new Rule부분은 화면에서 받아온 rule로 교체 예정
 //		Command command = new SetRuleCommand(new Rule());
 //		command.execute(outermostCell);
-		new RuleFrame();
+		new RuleFrame(outermostCell);
 	}
 
 	/** Override paint to ask the outermost Neighborhood

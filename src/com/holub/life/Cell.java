@@ -13,8 +13,7 @@ import com.holub.rule.RuleComponent;
  * @include /etc/license.txt
  */
 
-public interface Cell
-{
+public interface Cell {
 	/** Figure out the next state of the cell, given the specified
 	 *  neighbors.
 	 *  @return true if the cell is unstable (changed state).
@@ -92,6 +91,7 @@ public interface Cell
 	void setRule(RuleComponent rule);
 
 
+
 	/**
 	 *	The Cell.Memento interface stores the state
 	 *	of a Cell and all its subcells for future restoration.
@@ -143,7 +143,7 @@ public interface Cell
 
 	public static final Cell DUMMY = new Cell()
 	{
-		public boolean figureNextState(Cell n,  Cell s,  Cell e,  Cell w,
+		public boolean figureNextState(Cell n, Cell s, Cell e, Cell w,
 									   Cell ne, Cell nw, Cell se, Cell sw)
 											{return true;  			  }
 
