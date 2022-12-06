@@ -69,13 +69,17 @@ public class Universe extends JPanel
 		}catch (Exception e){
 
 		}
+//		try{
+//			ConditionComponent conditions = new Condition(new NullLogicalOperation());
+//			conditions.addCondition(new NeighborLocationCondition("north", false));
+//			defaultRules.addRule(new RuleItem(conditions, new AliveBehaviour()));
+//
+//		}catch (Exception e){
+//
+//		}
 
 
 
-//		ConditionComponent conditions = new Condition(new LogicalAnd());
-//		conditions.addCondition(new NeighborLocationCondition("north", true));
-//		conditions.addCondition(new NeighborLocationCondition("south", true));
-//		defaultRules.addRule(new RuleItem(conditions, new AliveBehaviour()));
 
 
 

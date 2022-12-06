@@ -12,8 +12,9 @@ public class Condition extends ConditionComponent {
     }
 
     public boolean checkIsValid(){
-        if(operation == null && conditionComponents.size() == 2)
+        if((operation == null || operation instanceof NullLogicalOperation) && conditionComponents.size() == 2)
             return false;
+
         if(conditionComponents.size() > 2)
             return false;
 
@@ -37,7 +38,6 @@ public class Condition extends ConditionComponent {
         if(conditionComponents.size() == 1){
             return operation.operate(conditionComponents.get(0).check(cell, north, south, east, west, northeast, northwest, southeast, southwest));
         }
-
         return true;
     }
 
@@ -56,13 +56,16 @@ public class Condition extends ConditionComponent {
         this.operation = operation;
     }
 
-    public boolean hasOperation(){return operation !=null;}
+    public boolean hasOperation(){return operation !=null && !(operation instanceof NullLogicalOperation);}
 
 
     public String toString(){
+        if(conditionComponents.size() == 0)
+            return "";
         if(conditionComponents.size() == 1){
             return conditionComponents.get(0).toString();
         }
-        return "("+conditionComponents.get(0).toString()+" "+operation.toString()+" "+conditionComponents.get(1).toString()+")";
+        return "("+conditionComponents.get(1).toString()+" "+operation.toString()+" "+conditionComponents.get(0).toString()+")";
+
     }
 }

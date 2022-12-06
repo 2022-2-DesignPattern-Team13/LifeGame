@@ -136,7 +136,7 @@ public class ConditionResultPanel extends JPanel {
     public ConditionComponent makeConditionComponent(){
         try{
             // 1. root 노드 생성
-            ConditionComponent result = new Condition(null);
+            ConditionComponent result = new Condition(new NullLogicalOperation());
 
             // 2. Stack 생성
             Stack<Object> stack = new Stack<>();
@@ -147,7 +147,7 @@ public class ConditionResultPanel extends JPanel {
                 if(o.toString().compareTo("(") == 0){
                     stack.push(o);
                 }else if(o.toString().compareTo(")") == 0){
-                    ConditionComponent midResult = new Condition(null);
+                    ConditionComponent midResult = new Condition(new NullLogicalOperation());
 
                     while(!stack.empty()){
                         Object top = stack.pop();
