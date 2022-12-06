@@ -100,9 +100,6 @@ public class RuleFrame extends JFrame {
             if(createdCondtion == null)
                 return;
 
-            JButton upButton = new JButton("↑");
-            JButton downButton = new JButton("↓");
-
             JLabel labelRule = new JLabel(createdCondtion.toString());
             labelRule.setFont(new Font(null, Font.BOLD, 13));
 
@@ -117,8 +114,6 @@ public class RuleFrame extends JFrame {
             JPanel ruleLabelPanel = new JPanel();
             ruleLabelPanel.setLayout(new FlowLayout());
             ruleLabelPanel.setBackground(Color.white);
-            ruleLabelPanel.add(downButton);
-            ruleLabelPanel.add(upButton);
             ruleLabelPanel.add(new JLabel("Rule: "));
             ruleLabelPanel.add(labelBehavior);
             ruleLabelPanel.add(new JLabel(", when cell is "));
