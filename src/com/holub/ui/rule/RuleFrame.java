@@ -49,6 +49,9 @@ public class RuleFrame extends JFrame {
         // Rule 생성 button
         JButton addRuleButton = new JButton("+ Add new rule");
         setAddRuleButtonActionListener(addRuleButton);
+        JPanel addButtonPanel = new JPanel();
+        addButtonPanel.add(addRuleButton);
+        addButtonPanel.setAlignmentX(CENTER_ALIGNMENT);
 
         // 생성된 Rule List 레이아웃
         ruleListPanel = new JPanel();
@@ -67,16 +70,17 @@ public class RuleFrame extends JFrame {
 
         JPanel conditionSettingPanel = new JPanel();
         conditionSettingPanel.add(conditionContainPanel);
-        conditionSettingPanel.add(addRuleButton);
 
 
         // JFrame 설정
         this.setVisible(true);
-        this.setSize(800, 900);
+        this.setSize(900, 900);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
 
         this.add(conditionSettingPanel);
+        this.add(addButtonPanel);
+        this.add(Box.createVerticalStrut(10));
         this.add(ruleListPanel);
         this.add(applyButtonPanel);
     }
@@ -117,10 +121,4 @@ public class RuleFrame extends JFrame {
             outermostCell.setRule(rules);
         });
     }
-
-//    static class Test {
-//        public static void main(String[] args) {
-//            new RuleFrame(outermostCell);
-//        }
-//    }
 }

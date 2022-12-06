@@ -3,6 +3,7 @@ package com.holub.ui.rule;
 import com.holub.rule.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -21,14 +22,30 @@ public class ConditionResultPanel extends JPanel {
     private JButton clearButton;
     private HashMap<JTextField, Object> conditionResultMap;
 
+    private JPanel conditionResultPanel;
+
     public ConditionResultPanel(){
         conditionResult = new ArrayList<>();
+        conditionResultPanel = new JPanel();
+        conditionResultPanel.setBackground(new Color(255,254,248));
+        conditionResultPanel.setLayout(new FlowLayout());
 
-        label = new JLabel("Condition Result");
-        add(label);
+        // Frame ui
+        setLayout(new GridLayout(0,1));
+        setBackground(new Color(255,254,248));
+        label = new JLabel("Condition Result : ");
+        label.setFont(new Font("Arial", Font.BOLD, 15));
 
-        checkValidnessButton = new JButton("check");
+
+        // valid ui
+        JPanel validPanel = new JPanel();
+        checkValidnessButton = new JButton("Check valid :");
+        checkValidnessButton.setBackground(Color.blue);
         validnessResult = new JTextField();
+        validPanel.setBackground(new Color(255,254,248));
+        validPanel.add(checkValidnessButton);
+        validPanel.add(validnessResult);
+
         clearButton = new JButton("clear");
         conditionResultMap = new HashMap<>();
 
@@ -56,9 +73,12 @@ public class ConditionResultPanel extends JPanel {
                 conditionResultMap.clear();
             }
         });
-        add(checkValidnessButton);
-        add(validnessResult);
-        add(clearButton);
+
+
+        this.add(label);
+        this.add(conditionResultPanel);
+        this.add(validPanel);
+        this.add(clearButton);
     }
 
     public ConditionComponent getCreatedCondition() {
@@ -79,7 +99,7 @@ public class ConditionResultPanel extends JPanel {
         });
 
         conditionResultMap.put(newCondition, o);
-        add(newCondition);
+        conditionResultPanel.add(newCondition);
 
         revalidate();
         repaint();
@@ -87,7 +107,7 @@ public class ConditionResultPanel extends JPanel {
 
     public void removeResult(JTextField textField){
         conditionResult.remove(conditionResultMap.get(textField));
-        remove(textField);
+        conditionResultPanel.remove(textField);
 
         revalidate();
         repaint();
