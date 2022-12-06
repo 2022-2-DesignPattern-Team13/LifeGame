@@ -2,7 +2,6 @@ package com.holub.life;
 import java.awt.*;
 
 import com.holub.rule.Rule;
-import com.holub.rule.RuleComponent;
 
 /***
  * This interface is the basic unit that comprises a life board.
@@ -88,7 +87,7 @@ public interface Cell {
 
 	void setWillBeAlive(boolean b);
 
-	void setRule(RuleComponent rule);
+	void setRule(Rule rule);
 
 
 
@@ -159,7 +158,7 @@ public interface Cell {
 		}
 
 		@Override
-		public void setRule(RuleComponent rule) {
+		public void setRule(Rule rule) {
 
 		}
 

@@ -45,7 +45,7 @@ public class NeighbourCountConditionPanel extends JPanel {
         private JComboBox<Integer> targetCountComboBox;
 
         public TargetCountPanel(){
-            label = new JLabel("target count");
+            label = new JLabel("target count :");
             add(label);
 
             targetCountComboBox = new JComboBox<>(new Integer[]{0, 1, 2, 3, 4, 5, 6, 7, 8});
@@ -62,7 +62,7 @@ public class NeighbourCountConditionPanel extends JPanel {
         private JComboBox<Compare> compareJComboBox;
 
         public ComparePanel(){
-            label = new JLabel("comparator");
+            label = new JLabel("comparator :");
             add(label);
 
             compareJComboBox = new JComboBox<>(new Compare[]{new CompareEqual(), new CompareEqualOrMoreThan()});

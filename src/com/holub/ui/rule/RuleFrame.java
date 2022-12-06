@@ -6,6 +6,9 @@ import com.holub.rule.*;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashMap;
 
 public class RuleFrame extends JFrame {
 
@@ -19,14 +22,17 @@ public class RuleFrame extends JFrame {
 
     private Behaviour selectedBehavior;
 
-    private RuleComponent ruleComponent;
+    private Rule rules;
     private Cell outermostCell;
+    private HashMap<JPanel,RuleItem> panelRuleItemHashMap;
 
     public RuleFrame(Cell outermostCell) {
         super("Rule");
 
         // ruleComponent new
-        ruleComponent = new Rule();
+        rules = new Rule();
+
+        panelRuleItemHashMap = new HashMap<>();
 
         this.outermostCell = outermostCell;
 
@@ -49,6 +55,9 @@ public class RuleFrame extends JFrame {
         // Rule 생성 button
         JButton addRuleButton = new JButton("+ Add new rule");
         setAddRuleButtonActionListener(addRuleButton);
+        JPanel addButtonPanel = new JPanel();
+        addButtonPanel.add(addRuleButton);
+        addButtonPanel.setAlignmentX(CENTER_ALIGNMENT);
 
         // 생성된 Rule List 레이아웃
         ruleListPanel = new JPanel();
@@ -67,16 +76,20 @@ public class RuleFrame extends JFrame {
 
         JPanel conditionSettingPanel = new JPanel();
         conditionSettingPanel.add(conditionContainPanel);
-        conditionSettingPanel.add(addRuleButton);
 
 
         // JFrame 설정
         this.setVisible(true);
-        this.setSize(800, 900);
+        this.setSize(1100, 900);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
+        Dimension frameSize = this.getSize(); // 프레임 사이즈
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // 모니터 사이즈
+        this.setLocation((screenSize.width - frameSize.width)/2, (screenSize.height - frameSize.height)/2); // 화면 중앙 위치
 
         this.add(conditionSettingPanel);
+        this.add(addButtonPanel);
+        this.add(Box.createVerticalStrut(10));
         this.add(ruleListPanel);
         this.add(applyButtonPanel);
     }
@@ -94,8 +107,9 @@ public class RuleFrame extends JFrame {
             JLabel labelBehavior = new JLabel(selectedBehavior.toString());
             labelBehavior.setFont(new Font(null, Font.BOLD, 13));
 
-            ruleComponent.addRule(new RuleItem(createdCondtion, selectedBehavior));
+            RuleItem ruleItem = new RuleItem(createdCondtion, selectedBehavior);
 
+            rules.addRule(ruleItem);
 
             JPanel ruleLabelPanel = new JPanel();
             ruleLabelPanel.setLayout(new FlowLayout());
@@ -105,6 +119,20 @@ public class RuleFrame extends JFrame {
             ruleLabelPanel.add(new JLabel(", when cell is "));
             ruleLabelPanel.add(labelRule);
 
+            JButton removeButton = new JButton("-");
+            removeButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    ruleListPanel.remove(ruleLabelPanel);
+                    panelRuleItemHashMap.remove(ruleLabelPanel);
+                    rules.removeRule(ruleItem);
+                    revalidate();
+                    repaint();
+                }
+            });
+            ruleLabelPanel.add(removeButton);
+
+            panelRuleItemHashMap.put(ruleLabelPanel, ruleItem);
             ruleListPanel.add(ruleLabelPanel);
             revalidate();
             repaint();
@@ -114,13 +142,7 @@ public class RuleFrame extends JFrame {
     private void setApplyBtnActionListener(JButton button) {
         button.addActionListener(e -> {
             // apply 버튼 클릭
-            outermostCell.setRule(ruleComponent);
+            outermostCell.setRule(rules);
         });
     }
-
-//    static class Test {
-//        public static void main(String[] args) {
-//            new RuleFrame(outermostCell);
-//        }
-//    }
 }
