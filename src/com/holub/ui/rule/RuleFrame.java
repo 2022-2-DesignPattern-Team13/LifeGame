@@ -6,6 +6,11 @@ import com.holub.rule.*;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.HashMap;
 
 public class RuleFrame extends JFrame {
 
@@ -21,12 +26,15 @@ public class RuleFrame extends JFrame {
 
     private Rule rules;
     private Cell outermostCell;
+    private HashMap<JPanel,RuleItem> panelRuleItemHashMap;
 
     public RuleFrame(Cell outermostCell) {
         super("Rule");
 
         // ruleComponent new
         rules = new Rule();
+
+        panelRuleItemHashMap = new HashMap<>();
 
         this.outermostCell = outermostCell;
 
@@ -98,8 +106,9 @@ public class RuleFrame extends JFrame {
             JLabel labelBehavior = new JLabel(selectedBehavior.toString());
             labelBehavior.setFont(new Font(null, Font.BOLD, 13));
 
-            rules.addRule(new RuleItem(createdCondtion, selectedBehavior));
+            RuleItem ruleItem = new RuleItem(createdCondtion, selectedBehavior);
 
+            rules.addRule(ruleItem);
 
             JPanel ruleLabelPanel = new JPanel();
             ruleLabelPanel.setLayout(new FlowLayout());
@@ -109,6 +118,20 @@ public class RuleFrame extends JFrame {
             ruleLabelPanel.add(new JLabel(", when cell is "));
             ruleLabelPanel.add(labelRule);
 
+            JButton removeButton = new JButton("-");
+            removeButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    ruleListPanel.remove(ruleLabelPanel);
+                    panelRuleItemHashMap.remove(ruleLabelPanel);
+                    rules.removeRule(ruleItem);
+                    revalidate();
+                    repaint();
+                }
+            });
+            ruleLabelPanel.add(removeButton);
+
+            panelRuleItemHashMap.put(ruleLabelPanel, ruleItem);
             ruleListPanel.add(ruleLabelPanel);
             revalidate();
             repaint();

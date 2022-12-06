@@ -21,7 +21,7 @@ public class Rule{
         rules.add(index, ruleItem);
     }
 
-    public void removeRule(Rule rule){
+    public void removeRule(RuleItem rule){
         rules.remove(rule);
     }
     public boolean apply(Cell cell, Cell north, Cell south, Cell east, Cell west, Cell northeast, Cell northwest, Cell southeast, Cell southwest){
