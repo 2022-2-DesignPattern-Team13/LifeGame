@@ -24,41 +24,8 @@ public class XORCommand implements ComposeCommand{
     }
 
     @Override
-    public FileInputStream execute(FileInputStream[] fileInput) throws IOException {
-
-
-        Collection cell1=new ArrayList();
-        Collection cell2=new ArrayList();
-        Collection composedCells= new ArrayList();
-
-        try
-        {
-            //fileinput 받아와서 객체로 저장
-            ObjectInputStream source1 = new ObjectInputStream( fileInput[0] );
-            ObjectInputStream source2 = new ObjectInputStream( fileInput[1] );
-            cell1 = (Collection)( source1.readObject() );
-            cell2 = (Collection)( source2.readObject() );
-
-            //AND 합성
-            composedCells=xor(cell1,cell2);
-
-
-            //합성된 객체를 파일로 변환
-            FileOutputStream fos = new FileOutputStream("XORComposedfile");
-            ObjectOutputStream out = new ObjectOutputStream(fos);
-            out.writeObject(composedCells);
-
-            FileInputStream fileoutput = new FileInputStream( "XORComposedfile" );
-
-            return fileoutput;
-        }
-        catch(ClassNotFoundException e)
-        {
-
-            throw new IOException(
-                    "Internal Error: Class not found on load");
-        }
-
+    public Collection execute(Collection cell1, Collection cell2) {
+        return xor(cell1, cell2);
     }
 
     public <T> Set<T> union(Collection<T> list1, Collection<T> list2) {
