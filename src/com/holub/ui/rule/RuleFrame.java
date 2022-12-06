@@ -101,9 +101,9 @@ public class RuleFrame extends JFrame {
             ruleLabelPanel.setLayout(new FlowLayout());
             ruleLabelPanel.setBackground(Color.white);
             ruleLabelPanel.add(new JLabel("Rule: "));
-            ruleLabelPanel.add(labelRule);
-            ruleLabelPanel.add(new JLabel(", when cell is "));
             ruleLabelPanel.add(labelBehavior);
+            ruleLabelPanel.add(new JLabel(", when cell is "));
+            ruleLabelPanel.add(labelRule);
 
             ruleListPanel.add(ruleLabelPanel);
             revalidate();
