@@ -53,6 +53,7 @@ public class ConditionResultPanel extends JPanel {
                 for(JTextField textField : conditionResultMap.keySet()){
                     removeResult(textField);
                 }
+                conditionResultMap.clear();
             }
         });
         add(checkValidnessButton);
@@ -68,10 +69,12 @@ public class ConditionResultPanel extends JPanel {
         conditionResult.add(o);
 
         JTextField newCondition = new JTextField(o.toString());
+        newCondition.setEditable(false);
         newCondition.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 removeResult(newCondition);
+                conditionResultMap.remove(newCondition);
             }
         });
 
@@ -84,7 +87,6 @@ public class ConditionResultPanel extends JPanel {
 
     public void removeResult(JTextField textField){
         conditionResult.remove(conditionResultMap.get(textField));
-        conditionResultMap.remove(textField);
         remove(textField);
 
         revalidate();
@@ -156,6 +158,8 @@ public class ConditionResultPanel extends JPanel {
                     result.setOperation((LogicalOperation) top);
                 }else if(top instanceof ConditionComponent){
                     result.addCondition((ConditionComponent) top);
+                }else{
+                    return null;
                 }
                 stack.pop();
             }
