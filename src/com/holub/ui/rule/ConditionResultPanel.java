@@ -5,6 +5,8 @@ import com.holub.rule.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Stack;
@@ -17,7 +19,7 @@ public class ConditionResultPanel extends JPanel {
     private ConditionComponent createdCondition;
 
     private JButton clearButton;
-    private HashMap<Object, JTextField> conditionResultMap;
+    private HashMap<JTextField, Object> conditionResultMap;
 
     public ConditionResultPanel(){
         conditionResult = new ArrayList<>();
@@ -48,8 +50,8 @@ public class ConditionResultPanel extends JPanel {
         clearButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                for(Object o : conditionResultMap.keySet()){
-                    removeResult(o);
+                for(JTextField textField : conditionResultMap.keySet()){
+                    removeResult(textField);
                 }
             }
         });
@@ -66,17 +68,24 @@ public class ConditionResultPanel extends JPanel {
         conditionResult.add(o);
 
         JTextField newCondition = new JTextField(o.toString());
+        newCondition.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                removeResult(newCondition);
+            }
+        });
 
-        conditionResultMap.put(o, newCondition);
+        conditionResultMap.put(newCondition, o);
         add(newCondition);
 
         revalidate();
         repaint();
     }
 
-    public void removeResult(Object o){
-        conditionResult.remove(o);
-        remove(conditionResultMap.get(o));
+    public void removeResult(JTextField textField){
+        conditionResult.remove(conditionResultMap.get(textField));
+        conditionResultMap.remove(textField);
+        remove(textField);
 
         revalidate();
         repaint();
