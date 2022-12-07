@@ -8,12 +8,12 @@ public class Rule{
     public Rule(){
         rules = new ArrayList<>();
 
-        // 가장 낮은 우선순위의 규칙은 그냥 죽는 것
-        rules.add(new RuleItem(new Condition(new NullLogicalOperation()), new DieBehaviour()));
+//         가장 낮은 우선순위의 규칙은 그냥 죽는 것
+//        rules.add(new RuleItem(new Condition(new NullLogicalOperation()), new DieBehaviour()));
     }
 
     public void addRule(RuleItem ruleItem){
-        rules.add(0, ruleItem);
+        rules.add( ruleItem);
     }
 
     public void addRule(int index, RuleItem ruleItem){
@@ -29,6 +29,9 @@ public class Rule{
                 return true;
             }
         }
+        if(new RuleItem(new Condition(new NullLogicalOperation()), new DieBehaviour()).apply(cell, north, south, east, west, northeast, northwest, southeast, southwest))
+            return true;
+
         return false;
     }
 }

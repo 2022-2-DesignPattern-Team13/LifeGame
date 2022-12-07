@@ -1,6 +1,5 @@
 package com.holub.rule;
 
-import com.holub.tools.Log;
 import com.holub.ui.rule.ConditionResultPanel;
 import org.junit.jupiter.api.Test;
 
@@ -115,13 +114,14 @@ public class MakeConditionComponentTest {
         assertEquals(null, result);
     }
 
-    // condition1 && &&
+    // condition1 && && condition2
     @Test
     public void testInvalidOperator2(){
         ConditionResultPanel conditionResultPanel = new ConditionResultPanel();
         conditionResultPanel.addResult(new ConditionItem());
         conditionResultPanel.addResult(new LogicalAnd());
         conditionResultPanel.addResult(new LogicalAnd());
+        conditionResultPanel.addResult(new ConditionItem());
 
         ConditionComponent result = conditionResultPanel.makeConditionComponent();
 
