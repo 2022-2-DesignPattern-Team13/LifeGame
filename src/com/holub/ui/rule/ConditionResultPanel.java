@@ -159,7 +159,7 @@ public class ConditionResultPanel extends JPanel {
                             break;
 
                         if(top instanceof LogicalOperation){
-                            if(midResult.hasOperation())
+                            if(midResult.hasOperation() || !midResult.hasOneCondition())
                                 throw new Exception();
 
                             midResult.setOperation((LogicalOperation) top);
@@ -175,9 +175,9 @@ public class ConditionResultPanel extends JPanel {
             }
 
             while(!stack.empty()){
-                Object top = stack.peek();
+                Object top = stack.pop();
                 if(top instanceof LogicalOperation){
-                    if(result.hasOperation())
+                    if(result.hasOperation() || !result.hasOneCondition())
                         return null;
                     result.setOperation((LogicalOperation) top);
                 }else if(top instanceof ConditionComponent){
@@ -185,7 +185,6 @@ public class ConditionResultPanel extends JPanel {
                 }else{
                     return null;
                 }
-                stack.pop();
             }
 
             if(result.checkIsValid()){
