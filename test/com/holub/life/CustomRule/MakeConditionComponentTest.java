@@ -1,5 +1,9 @@
-package com.holub.rule;
+package com.holub.life.CustomRule;
 
+import com.holub.rule.ConditionComponent;
+import com.holub.rule.ConditionItem;
+import com.holub.rule.LogicalAnd;
+import com.holub.rule.LogicalOr;
 import com.holub.ui.rule.ConditionResultPanel;
 import org.junit.jupiter.api.Test;
 
