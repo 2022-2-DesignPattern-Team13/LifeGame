@@ -17,24 +17,24 @@ class ComposeControlTest {
 
     @Test
     void doComposeAnd() throws IOException, ClassNotFoundException {
-        doCompose(andCommandNm, new FileInputStream(".\\test\\test_house_and_square"));
+        doCompose(andCommandNm, new FileInputStream("./test/test_house_and_square"));
     }
 
     @Test
     void doComposeOr() throws IOException, ClassNotFoundException {
-        doCompose(orCommandNm, new FileInputStream(".\\test\\test_house_or_square"));
+        doCompose(orCommandNm, new FileInputStream("./test/test_house_or_square"));
     }
 
     @Test
     void doComposeXor() throws IOException, ClassNotFoundException {
-        doCompose(xorCommandNm, new FileInputStream(".\\test\\test_house_xor_square"));
+        doCompose(xorCommandNm, new FileInputStream("./test/test_house_xor_square"));
     }
 
     void doCompose(int commandNm, FileInputStream expectedFileOutput) throws IOException, ClassNotFoundException {
         ComposeControl _ComposeControl = ComposeControl.getInstance();
 
-        FileInputStream file1 = new FileInputStream(".\\test\\test_house");
-        FileInputStream file2 = new FileInputStream(".\\test\\test_square");
+        FileInputStream file1 = new FileInputStream("./test/test_house");
+        FileInputStream file2 = new FileInputStream("./test/test_square");
         FileInputStream[] fileInput = new FileInputStream[]{file1, file2};
 
         FileInputStream actualFileOutput = _ComposeControl.doCompose(fileInput, commandNm);
