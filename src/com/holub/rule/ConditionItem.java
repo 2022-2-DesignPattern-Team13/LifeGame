@@ -10,4 +10,6 @@ public class ConditionItem extends ConditionComponent {
     public boolean checkIsValid(){
         return true;
     }
+
+    public boolean hasOneCondition(){return true;}
 }

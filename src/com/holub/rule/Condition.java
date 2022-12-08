@@ -58,7 +58,7 @@ public class Condition extends ConditionComponent {
 
     public boolean hasOperation(){return operation !=null && !(operation instanceof NullLogicalOperation);}
 
-
+    public boolean hasOneCondition(){return conditionComponents.size()==1;}
     public String toString(){
         if(conditionComponents.size() == 0)
             return "";

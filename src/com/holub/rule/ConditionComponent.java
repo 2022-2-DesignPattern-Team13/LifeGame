@@ -27,4 +27,6 @@ public class ConditionComponent {
         return false;
     }
 
+    public boolean hasOneCondition(){return false;}
+
 }
